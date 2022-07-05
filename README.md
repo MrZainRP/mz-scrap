@@ -1,12 +1,34 @@
 ## MZ-SCRAP
 A FiveM resource which allows players to scrap wrecks found in GTA V with experience and item progression.
 
-### INTRODUCTION 
+_By Mr_Zain#4139_
+
+## PREVIEW
+
+[![mz-scrap](https://i.imgur.com/pyXfLzP.png)](https://www.youtube.com/watch?v=8nxTcmuyYBI "mz-scrap for FiveM by Mr_Zain#4139")
+
+## INTRODUCTION 
 - A scrap task (no job required) designed to allow players to interact with scrap found in the base GTA V models, particularly the scrap yard south of the main city, the car and plane scrap yard found South of the main part of Sandy Shores and (to a lesser extent) the scrap yard found in the heart of Paleto. Props can be added to the list of items a player can interact with by adding those props to the config.lua file.
 - Scraping commences with the player using their hands. Each successful scrap attended to this way yields low-tier items + low-tier experience gain for the player.
 - Mid-tier scraping involves the use of a screwdriver. The scraping function is slightly harder by way of skillcheck (and can be made more or less difficult by manipulation of the qb-lock export found in the client.lua), takes slightly longer and produces mid-tier items and mid-tier XP.
 - High-tier scraping involves the use of a blowtorch. Again, the scraping function is slightly harder (and can be modified), takes slightly longer and produces top-tier items.
 - Certain items obtained from scraping can then be broken down into materials used for crafting in other scripts. mz-scrap utilises the conventional iron, copper, steel materials which can then be used elsewhere for crafting. 
+
+## DEPENDENCIES
+
+NOTE: You should have each of the dependencies other than qb-lock and mz-skills as part of a conventional qb-core install.
+
+**[mz-skills](https://github.com/MrZainRP/mz-skills)** - to track skill progress. All credit to Kings#4220 for the original qb-skillz now **[B1-skillz](https://github.com/Burn-One-Studios/B1-skillz)**
+
+**[progressbar](https://github.com/qbcore-framework/progressbar)**
+
+**[qb-target](https://github.com/qbcore-framework/qb-target)**
+
+**[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar)**
+
+**[qb-lock](https://github.com/Nathan-FiveM/qb-lock)**
+
+OPTIONAL: (Configured to work with okokNotify as well as base qb-core notifications).
 
 ### INSTALLATION INSTRUCTIONS/GUIDE
 
