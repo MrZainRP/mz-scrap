@@ -1,12 +1,12 @@
 ## MZ-SCRAP
-A FiveM resource which allows players to scrap wrecks found in GTA V with experience and item progression
+A FiveM resource which allows players to scrap wrecks found in GTA V with experience and item progression.
 
 ### INTRODUCTION 
-- A scrap job designed to allow players to interact with scrap found in the base GTA V models, particularly the scrap yard south of the main city, the car and plane scrap yard found South of the main part of Sandy Shores and (to a lesser extent) the scrap yard found in the heart of Paleto.
-- Scraping commences with the player using their hands. Each successful scrap yields low-tier items + low-tier experience
-- Mid-tier scraping involves the use of a screwdriver. Scraping function is slightly harder, takes slightly longer and produces mid-tier items and mid-tier XP.
-- High-tier scraping involves the use of a blowtorch. Scraping function is, again, slightly harder, takes slightly longer and produces top-tier items.
-- Certain items obtained from scraping can be broken down into materials used for crafting in other scripts. 
+- A scrap task (no job required) designed to allow players to interact with scrap found in the base GTA V models, particularly the scrap yard south of the main city, the car and plane scrap yard found South of the main part of Sandy Shores and (to a lesser extent) the scrap yard found in the heart of Paleto. Props can be added to the list of items a player can interact with by adding those props to the config.lua file.
+- Scraping commences with the player using their hands. Each successful scrap attended to this way yields low-tier items + low-tier experience gain for the player.
+- Mid-tier scraping involves the use of a screwdriver. The scraping function is slightly harder by way of skillcheck (and can be made more or less difficult by manipulation of the qb-lock export found in the client.lua), takes slightly longer and produces mid-tier items and mid-tier XP.
+- High-tier scraping involves the use of a blowtorch. Again, the scraping function is slightly harder (and can be modified), takes slightly longer and produces top-tier items.
+- Certain items obtained from scraping can then be broken down into materials used for crafting in other scripts. mz-scrap utilises the conventional iron, copper, steel materials which can then be used elsewhere for crafting. 
 
 ### INSTALLATION INSTRUCTIONS/GUIDE
 
