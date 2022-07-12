@@ -979,7 +979,7 @@ function BreakCardoorProcess()
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
         TriggerServerEvent("mz-scrap:server:GetCardoormats")
-        Wait(1000)
+        -- Wait(1000)
         TriggerServerEvent("mz-scrap:server:GetCardoormats2")
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
@@ -1213,11 +1213,11 @@ function BreakCarengineProcess()
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
         TriggerServerEvent("mz-scrap:server:GetCarenginemats")
-        Wait(1000)
+        --Wait(1000)
         TriggerServerEvent("mz-scrap:server:GetCarenginemats2")
-        Wait(1000)
+        --Wait(1000)
         TriggerServerEvent("mz-scrap:server:GetCarenginemats3")
-        Wait(1000)
+        --Wait(1000)
         TriggerServerEvent("mz-scrap:server:GetCarenginemats4")
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
