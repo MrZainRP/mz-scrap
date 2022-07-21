@@ -255,7 +255,6 @@ AddEventHandler('mz-scrap:server:GetMetalscrap', function()
     local chance = math.random(1, 100)
     Player.Functions.AddItem("metalscrap", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
-    Wait(3000)
     if chance < 20 then
         Player.Functions.RemoveItem("wd40", 1)
         TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['wd40'], "remove", 1)
