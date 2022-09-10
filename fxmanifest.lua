@@ -3,8 +3,9 @@ client_script "HR5C.lua"
 fx_version 'cerulean'
 game 'gta5'
 
-description 'mz-scrap - Made by Mr_Zain#4139'
-version '1.0.0'
+description 'A self-contained, progression based scrapping resource for qb-core. Configured to function with or without mz-skill XP integration'
+author 'Mr_Zain#4139'
+version '1.2.0'
 lua54 'yes'
 
 shared_scripts {
@@ -14,5 +15,6 @@ shared_scripts {
 }
 
 client_script 'client/main.lua'
+
 server_script 'server/main.lua'
 
