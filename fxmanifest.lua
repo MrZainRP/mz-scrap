@@ -1,5 +1,3 @@
-server_script "HR5C.lua"
-client_script "HR5C.lua"
 fx_version 'cerulean'
 game 'gta5'
 
