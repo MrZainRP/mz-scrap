@@ -49,7 +49,7 @@ Config.ScrewdriverRequiredItem = "screwdriver"          -- The qb-core/items.lua
 Config.ScrewdriverRequiredItemLabel = "Screwdriver"     -- The name of the above item which will appear in notifications.
 
 --if using mz-skills, the following will apply for screwdriver scrapping:
-Config.screwdriverXP = 1                  -- Minimum amount of "Scraping" XP to access screwdriver salvaging
+Config.screwdriverXP = 400                  -- Minimum amount of "Scraping" XP to access screwdriver salvaging
 Config.screwdriverXPlow = 1                 -- Lowest possible amount of XP for screwdriver scrapping.
 Config.screwdriverXPmid = 2                 -- Mid possible amount of XP for screwdriver scrapping.
 Config.screwdriverXPhigh = 4                -- Highest possible amount of XP for screwdriver scrapping.
@@ -73,7 +73,7 @@ Config.BlowtorchRequiredItem = "blowtorch"          -- The qb-core/items.lua nam
 Config.BlowtorchRequiredItemLabel = "Blowtorch"     -- The name of the above item which will appear in notifications.
 
 --if using mz-skills, the following will apply for blowtorch scrapping:
-Config.blowtorchXP = 1                   -- Minimum amount of "Scraping" XP to access blowtorch salvaging.
+Config.blowtorchXP = 1600                   -- Minimum amount of "Scraping" XP to access blowtorch salvaging.
 Config.blowtorchXPlow = 2                   -- Lowest possible amount of XP for blowtorch scrapping.
 Config.blowtorchXPmid = 3                   -- Mid possible amount of XP for blowtorch scrapping.
 Config.blowtorchXPhigh = 5                  -- Highest possible amount of XP for blowtorch scrapping.
