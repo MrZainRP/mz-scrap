@@ -26,7 +26,7 @@ NOTE: You should have each of the dependencies other than qb-lock and mz-skills 
 
 **[qb-skillbar](https://github.com/qbcore-framework/qb-skillbar)**
 
-**[qb-lock](https://github.com/Nathan-FiveM/qb-lock)**
+**[ps-ui](https://github.com/Project-Sloth/ps-ui)**
 
 OPTIONAL: (Configured to work with okokNotify as well as base qb-core notifications).
 
