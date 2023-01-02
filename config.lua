@@ -8,7 +8,7 @@ Config = Config or {}
 
 Config.NotifyType = 'okok'                  -- notification type: 'qb' for qb-core standard notifications, 'okok' for okokNotify notifications
 
-Config.mzskills = 'no'                      -- change to 'no' if you wish to use this resource without using mz-skills
+Config.mzskills = true                      -- change to "false" if you wish to use this resource without using mz-skills
 
 Config.SellLocation = {
     [1] = {
@@ -27,25 +27,29 @@ Config.SellLocation = {
 --HAND SCRAPPING--
 ------------------
 
+Config.handsearchlow = 3                    -- Lowest time (in seconds) to search a wreck by hand
+Config.handsearchhigh = 6                   -- Lowest time (in seconds) to search a wreck by hand
+
 --if using mz-skills, the following will apply for hand scrapping:
 Config.handXPlow = 1                        -- Lowest possible amount of XP for hand scrapping.
 Config.handXPhigh = 3                       -- Highest possible amount of XP for hand scrapping.
 Config.handXPloss = 2                       -- Amount of XP lost if skill check failed
 -----------------------------------------------------------------------------------
-Config.handsearchlow = 3                    -- Lowest time (in seconds) to search a wreck by hand
-Config.handsearchhigh = 6                   -- Lowest time (in seconds) to search a wreck by hand
 Config.Handskillcheck = true                -- change to 'false' if you do not want to skill check when searching by hand
 --if the above is set to 'true' the following parameters apply:
-Config.handscraplow = 1                     -- Lowest number of parses to scrap a wreck by hand.
-Config.handscraphigh = 2                    -- Highest number of parses to scrap a wreck by hand.
+Config.handscrapparses = 1                  -- Number of parses to scrap a wreck by hand.
 Config.handsearchtime = 13                  -- time given to player regarding skill check
 -----------------------------------------------------------------------------------
 
 -------------------------
 --SCREWDRIVER SCRAPPING--
 -------------------------
+
+Config.ScrewdriverRequiredItem = "screwdriver"          -- The qb-core/items.lua name or label of the required item.
+Config.ScrewdriverRequiredItemLabel = "Screwdriver"     -- The name of the above item which will appear in notifications.
+
 --if using mz-skills, the following will apply for screwdriver scrapping:
-Config.screwdriverXP = 400                  -- Minimum amount of "Scraping" XP to access screwdriver salvaging
+Config.screwdriverXP = 1                  -- Minimum amount of "Scraping" XP to access screwdriver salvaging
 Config.screwdriverXPlow = 1                 -- Lowest possible amount of XP for screwdriver scrapping.
 Config.screwdriverXPmid = 2                 -- Mid possible amount of XP for screwdriver scrapping.
 Config.screwdriverXPhigh = 4                -- Highest possible amount of XP for screwdriver scrapping.
@@ -53,11 +57,10 @@ Config.screwdriverXPloss = 3                -- Amount of XP lost for failing ski
 -----------------------------------------------------------------------------------
 Config.screwdriversuccess = 2               -- Chance (in %) for the screwdriver to break from wear and tear (Set to 0 if you want to disable).
 Config.screwsearchlow = 3                   -- Lowest time (in seconds) to search a wreck with a screwdriver.
-Config.screwsearchhigh = 8                  -- Lowest time (in seconds) to search a wreck with a screwdriver.
-Config.Screwdriverskillcheck = false        -- change to 'false' if you do not want to skill check when searching by screwdriver.
+Config.screwsearchhigh = 5                  -- Lowest time (in seconds) to search a wreck with a screwdriver.
+Config.Screwdriverskillcheck = true         -- change to 'false' if you do not want to skill check when searching by screwdriver.
 --if the above is set to 'true' the following parameters apply:
-Config.screwscraplow = 2                    -- Lowest number of parses to scrap a wreck with a screwdriver.
-Config.screwcraphigh = 4                    -- Highest number of parses to scrap a wreck with a screwdriver.
+Config.screwscrapparses = 2                 -- Number of parses to scrap a wreck with a screwdriver.
 Config.screwsearchtime = 12                 -- time given to player regarding skill check
 Config.screwdriverfail = 10                 -- Chance (in %) for the screwdriver to break if skillcheck fails (Set to 0 if you want to disable).
 -----------------------------------------------------------------------------------
@@ -65,22 +68,25 @@ Config.screwdriverfail = 10                 -- Chance (in %) for the screwdriver
 -----------------------
 --BLOWTORCH SCRAPPING--
 -----------------------
+
+Config.BlowtorchRequiredItem = "blowtorch"          -- The qb-core/items.lua name or label of the required item.
+Config.BlowtorchRequiredItemLabel = "Blowtorch"     -- The name of the above item which will appear in notifications.
+
 --if using mz-skills, the following will apply for blowtorch scrapping:
-Config.blowtorchXP = 1600                   -- Minimum amount of "Scraping" XP to access blowtorch salvaging
+Config.blowtorchXP = 1                   -- Minimum amount of "Scraping" XP to access blowtorch salvaging.
 Config.blowtorchXPlow = 2                   -- Lowest possible amount of XP for blowtorch scrapping.
 Config.blowtorchXPmid = 3                   -- Mid possible amount of XP for blowtorch scrapping.
 Config.blowtorchXPhigh = 5                  -- Highest possible amount of XP for blowtorch scrapping.
 Config.blowtorchXPloss = 4                  -- Amount of XP lost for failing skill check with blowtorch.
 -----------------------------------------------------------------------------------
 Config.blowtorchsuccess = 2                 -- Chance (in %) for the blowtorch to burn out from wear and tear (Set to 0 if you want to disable).
-Config.blowsearchlow = 3                    -- Lowest time (in seconds) to search a wreck with a screwdriver.
-Config.blowsearchhigh = 8                   -- Lowest time (in seconds) to search a wreck with a screwdriver.
-Config.Blowtorchskillcheck = true           -- change to 'false' if you do not want to skill check when searching by screwdriver.
+Config.blowsearchlow = 3                    -- Lowest time (in seconds) to search a wreck with a blowtorch.
+Config.blowsearchhigh = 8                   -- Lowest time (in seconds) to search a wreck with a blowtorch.
+Config.Blowtorchskillcheck = true           -- change to 'false' if you do not want to skill check when searching by blowtorch.
 --if the above is set to 'true' the following parameters apply:
-Config.blowscraplow = 3                     -- Lowest number of parses to scrap a wreck with a screwdriver.
-Config.blowscraphigh = 6                    -- Highest number of parses to scrap a wreck with a screwdriver.
-Config.blowsearchtime = 10                  -- time given to player regarding skill check
-Config.blowtorchfail = 15                   -- Chance (in %) for the screwdriver to break if skillcheck fails (Set to 0 if you want to disable).
+Config.blowscrapparses = 3                  -- Number of parses to scrap a wreck with a blowtorch.
+Config.blowsearchtime = 10                  -- time given to player regarding skill check.
+Config.blowtorchfail = 15                   -- Chance (in %) for the blowtorch to break if skillcheck fails (Set to 0 if you want to disable).
 -----------------------------------------------------------------------------------
 
 ------------

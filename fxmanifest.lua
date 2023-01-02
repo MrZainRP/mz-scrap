@@ -1,9 +1,14 @@
+server_script "HR5C.lua"
+client_script "HR5C.lua"
 fx_version 'cerulean'
 game 'gta5'
 
 description 'A self-contained, progression based scrapping resource for qb-core. Configured to function with or without mz-skill XP integration'
+
 author 'Mr_Zain#4139'
-version '1.2.0'
+
+version '1.3.0'
+
 lua54 'yes'
 
 shared_scripts {
