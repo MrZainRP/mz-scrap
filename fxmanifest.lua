@@ -7,7 +7,7 @@ description 'A self-contained, progression based scrapping resource for qb-core.
 
 author 'Mr_Zain#4139'
 
-version '1.3.0'
+version '1.3.5'
 
 lua54 'yes'
 
