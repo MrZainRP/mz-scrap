@@ -10,6 +10,8 @@ Config.NotifyType = 'okok'                  -- notification type: 'qb' for qb-co
 
 Config.mzskills = true                      -- change to "false" if you wish to use this resource without using mz-skills
 
+Config.ScrapXPSkill = "Scraping"            -- Take the name of your scrap skill from mz-skills (make sure they are exactly the same)
+
 Config.SellLocation = {
     [1] = {
             coords = vector3(-54.9, 6392.3, 31.62),
