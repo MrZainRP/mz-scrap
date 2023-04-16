@@ -10,7 +10,7 @@ description 'mz-scrap - a progression based scrapping resource for qb-core (with
 
 author 'Mr_Zain#4139'
 
-version '1.3.7'
+version '1.3.8'
 
 lua54 'yes'
 

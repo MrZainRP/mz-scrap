@@ -125,7 +125,7 @@ CreateThread(function()
             tier3Check = true 
         end 
     end)
-    exports['qb-target']:AddTargetModel(Config.Objects, {
+    exports['qb-target']:AddTargetModel(Config.objects, {
         options = {
             {
                 num = 1, 
@@ -1606,8 +1606,8 @@ end
 -------------------
 
 CreateThread(function()
-    exports['qb-target']:AddBoxZone("SellCarParts", vector3(-54.9, 6392.3, 31.62), 1.4, 0.5, {
-        name = "SellCarParts",
+    exports['qb-target']:AddBoxZone("sellcarpartszone", vector3(-54.9, 6392.3, 31.62), 1.4, 0.5, {
+        name = "sellcarpartszone",
         heading = 315,
         debugPoly = false,
         minZ = 29.02,
@@ -1719,8 +1719,8 @@ end)
 -------------
 
 CreateThread(function()
-    exports['qb-target']:AddBoxZone("scrapCraft", vector3(1176.08, 2635.15, 37.75), 3.6, 1, {
-        name = "scrapCraft",
+    exports['qb-target']:AddBoxZone("mzscrapcrafting", vector3(1176.08, 2635.15, 37.75), 3.6, 1, {
+        name = "mzscrapcrafting",
         heading = 90,
         debugPoly = false,
         minZ = 34.35,
