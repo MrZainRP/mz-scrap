@@ -125,7 +125,7 @@ CreateThread(function()
             tier3Check = true 
         end 
     end)
-    exports['qb-target']:AddTargetModel(Config.objects, {
+    exports['qb-target']:AddTargetModel(Config.Objects, {
         options = {
             {
                 num = 1, 
