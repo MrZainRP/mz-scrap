@@ -12,6 +12,10 @@ Config.mzskills = true                      -- change to "false" if you wish to 
 
 Config.ScrapXPSkill = "Scraping"            -- Take the name of your scrap skill from mz-skills (make sure they are exactly the same)
 
+Config.debugScrapOpt = true                 -- Set to false to remove debugging prints from console (server sided)
+
+Config.SkillCheck = "ps"                    -- Change to "skillbar" to use skillbar parameters instead.
+
 Config.SellLocation = {
     [1] = {
             coords = vector3(-54.9, 6392.3, 31.62),
@@ -98,6 +102,12 @@ Config.blowtorchfail = 15                   -- Chance (in %) for the blowtorch t
 -----------------------
 --BREAKING DOWN TIRES--
 -----------------------
+-- ps-ui:circle parameters
+Config.tireparselow = 4
+Config.tireparsehigh = 6
+Config.tiretimepslow = 9
+Config.tiretimepshigh = 12
+-- Skillbar:
 Config.tirelow = 4                          -- Lowest number of skillcheck parses to break down tires
 Config.tirehigh = 6                         -- Highest number of skillcheck parses to break down tires
 Config.tiretimelow = 10                     -- Lowest time (in seconds) to strip down tires.
@@ -114,6 +124,12 @@ Config.tireXPloss = 2                       -- Amount of "Scraping" XP lost for 
 ------------------
 --CLEANING NAILS--
 ------------------
+-- ps-ui:circle parameters
+Config.nailparselow = 4
+Config.nailparsehigh = 6
+Config.nailtimepslow = 9
+Config.nailtimepshigh = 12
+-- skillbar parameters:
 Config.naillow = 4                          -- Lowest number of skillcheck parses to clean nails.
 Config.nailhigh = 6                         -- Highest number of skillcheck parses to clean nails.
 Config.nailtimelow = 10                     -- Lowest time (in seconds) to clean nails.
@@ -130,6 +146,12 @@ Config.nailXPloss = 2                       -- Amount of "Scraping" XP lost for 
 ---------------------
 --BREAK APART RADIO--
 ---------------------
+-- ps-ui:circle parameters
+Config.radioparselow = 4
+Config.radioparsehigh = 6
+Config.radiotimepslow = 9
+Config.radiotimepshigh = 12
+-- skillbar parameters:
 Config.radiolow = 7                         -- Lowest number of skillcheck parses to break apart radio.
 Config.radiohigh = 9                        -- Highest number of skillcheck parses to break apart radio.
 Config.radiotimelow = 10                    -- Lowest time (in seconds) to break apart radio.
@@ -146,6 +168,12 @@ Config.radioXPloss = 2                      -- Amount of "Scraping" XP lost for 
 -------------
 --CAR JACKS--
 -------------
+-- ps-ui:circle parameters
+Config.jackparselow = 4
+Config.jackparsehigh = 6
+Config.jacktimepslow = 9
+Config.jacktimepshigh = 12
+-- skillbar parameters:
 Config.jackslow = 7                         -- Lowest number of skillcheck parses to break apart jacks.
 Config.jackshigh = 9                        -- Highest number of skillcheck parses to break apart jacks.
 Config.jackstimelow = 10                    -- Lowest time (in seconds) to break apart jacks.
@@ -164,6 +192,12 @@ Config.jacksXPloss = 2                      -- Amount of "Scraping" XP lost for 
 -------------
 --CAR DOORS--
 -------------
+-- ps-ui:circle parameters
+Config.doorparselow = 4
+Config.doorparsehigh = 6
+Config.doortimepslow = 9
+Config.doortimepshigh = 12
+-- skillbar parameters:
 Config.doorslow = 6                         -- Lowest number of skillcheck parses to break apart car doors.
 Config.doorshigh = 8                        -- Highest number of skillcheck parses to break apart car doors.
 Config.doorstimelow = 10                    -- Lowest time (in seconds) to break apart car doors.
@@ -182,6 +216,12 @@ Config.doorsXPloss = 2                      -- Amount of "Scraping" XP lost for 
 -------------
 --CAR HOODS--
 -------------
+-- ps-ui:circle parameters
+Config.hoodparselow = 4
+Config.hoodparsehigh = 6
+Config.hoodtimepslow = 9
+Config.hoodtimepshigh = 12
+-- skillbar parameters:
 Config.hoodslow = 6                         -- Lowest number of skillcheck parses to break apart car hood.
 Config.hoodshigh = 8                        -- Highest number of skillcheck parses to break apart car hood.
 Config.hoodstimelow = 10                    -- Lowest time (in seconds) to break apart car hood.
@@ -200,6 +240,12 @@ Config.hoodsXPloss = 2                      -- Amount of "Scraping" XP lost for 
 --------------
 --CAR ENGINE--
 --------------
+-- ps-ui:circle parameters
+Config.engineparselow = 4
+Config.engineparsehigh = 6
+Config.enginetimepslow = 9
+Config.enginetimepshigh = 12
+-- skillbar parameters:
 Config.enginelow = 10                       -- Lowest number of skillcheck parses to break apart car engine.
 Config.enginehigh = 13                      -- Highest number of skillcheck parses to break apart car engine.
 Config.enginetimelow = 20                   -- Lowest time (in seconds) to break apart car engine.

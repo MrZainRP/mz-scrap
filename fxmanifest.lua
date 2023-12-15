@@ -2,13 +2,13 @@ fx_version 'cerulean'
 
 game 'gta5'
 
+lua54 'yes'
+
+author 'Mr_Zain - https://discord.gg/CqNYvE3CkA'
+
 description 'mz-scrap - a progression based scrapping resource for qb-core (with or without mz-skill XP integration)'
 
-author 'Mr_Zain#4139'
-
-version '1.3.8'
-
-lua54 'yes'
+version '1.5.0'
 
 shared_scripts {
 	'@qb-core/shared/locale.lua',
