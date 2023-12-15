@@ -15,80 +15,57 @@ local ItemList = {
 -- TIER 1 EXTRACT --
 --------------------
 
-local function generateScrapKey()
-local keyLength = math.random(5, 10)
-local key = ""
-local charset = "abcdefghijklmnopqrstuvwxyz"
-local charsetLength = string.len(charset)
-          
-for i = 1, keyLength do
-    local randomIndex = math.random(1, charsetLength)
-    local randomChar = string.sub(charset, randomIndex, randomIndex)
-    key = key .. randomChar
-end
-  
-return key
-end
-  
-local randomKey = generateScrapKey()
-    
-function ScrapKey()
-    return randomKey
-end
-          
-QBCore.Functions.CreateCallback('mz-scrap:GetKey', function(source, cb)
-    local result = ScrapKey()
-    cb(result)
-end)
-
 RegisterNetEvent('mz-scrap:server:ScrapReward', function(antiEx)
 	local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local luck2 = math.random(1, 20)
-    KeyCheck(source, antiEx)
-    if luck2 > 2 and luck2 < 21 then
-        local luck = math.random(1, 100)
-        local amount = math.random(1, 1)
-        local src = source
-        local Player = QBCore.Functions.GetPlayer(src)
-        if luck > 0 and luck < 26 then
-            Player.Functions.AddItem(QBCore.Shared.Items["rustynails"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["rustynails"], 'add', amount)   
-        elseif luck > 25 and luck < 46 then
-            Player.Functions.AddItem(QBCore.Shared.Items["oldtire"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["oldtire"], 'add', amount)
-        elseif luck > 45 and luck < 66 then
-            Player.Functions.AddItem(QBCore.Shared.Items["chewinggum"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["chewinggum"], 'add', amount)
-        elseif luck > 65 and luck < 76 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carwipers"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carwipers"], 'add', amount)
-        elseif luck > 75 and luck < 86 then
-            Player.Functions.AddItem(QBCore.Shared.Items["tissuebox"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["tissuebox"], 'add', amount)
-        elseif luck > 85 and luck < 96 then
-            Player.Functions.AddItem(QBCore.Shared.Items["fuelcap"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["fuelcap"], 'add', amount)
-        elseif luck > 95 and luck < 100 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carjack"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carjack"], 'add')    
-        elseif luck == 100 then
-            Player.Functions.AddItem(QBCore.Shared.Items["pistol1"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol1"], 'add')      
+    if not antiEx then 
+        if luck2 > 2 and luck2 < 21 then
+            local luck = math.random(1, 100)
+            local amount = math.random(1, 1)
+            local src = source
+            local Player = QBCore.Functions.GetPlayer(src)
+            if luck > 0 and luck < 26 then
+                Player.Functions.AddItem(QBCore.Shared.Items["rustynails"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["rustynails"], 'add', amount)   
+            elseif luck > 25 and luck < 46 then
+                Player.Functions.AddItem(QBCore.Shared.Items["oldtire"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["oldtire"], 'add', amount)
+            elseif luck > 45 and luck < 66 then
+                Player.Functions.AddItem(QBCore.Shared.Items["chewinggum"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["chewinggum"], 'add', amount)
+            elseif luck > 65 and luck < 76 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carwipers"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carwipers"], 'add', amount)
+            elseif luck > 75 and luck < 86 then
+                Player.Functions.AddItem(QBCore.Shared.Items["tissuebox"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["tissuebox"], 'add', amount)
+            elseif luck > 85 and luck < 96 then
+                Player.Functions.AddItem(QBCore.Shared.Items["fuelcap"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["fuelcap"], 'add', amount)
+            elseif luck > 95 and luck < 100 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carjack"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carjack"], 'add')    
+            elseif luck == 100 then
+                Player.Functions.AddItem(QBCore.Shared.Items["pistol1"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol1"], 'add')      
+            end
+            Wait(100)
+            if Config.NotifyType == 'qb' then
+                TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
+            elseif Config.NotifyType == "okok" then
+                TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
+            end
+        else
+            Wait(100)
+            if Config.NotifyType == 'qb' then
+                TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
+            elseif Config.NotifyType == "okok" then
+                TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
+            end
         end
-        Wait(100)
-        if Config.NotifyType == 'qb' then
-            TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
-        elseif Config.NotifyType == "okok" then
-            TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
-        end
-    else
-        Wait(100)
-        if Config.NotifyType == 'qb' then
-            TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
-        elseif Config.NotifyType == "okok" then
-            TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
-        end
+    else 
+        cheaterDeal()
     end
 end)
 
@@ -101,51 +78,54 @@ RegisterNetEvent('mz-scrap:server:ScrapReward2', function(antiEx)
 	local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local luck2 = math.random(1, 20)
-    KeyCheck(source, antiEx)
-    if luck2 > 2 and luck2 < 21 then
-        local luck = math.random(1, 100)
-        local amount = math.random(1, 1)
-        local src = source
-        local Player = QBCore.Functions.GetPlayer(src)
-        if luck > 0 and luck < 26 then
-            Player.Functions.AddItem(QBCore.Shared.Items["rustynails"].name, 2)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["rustynails"], 'add', 2)   
-        elseif luck > 25 and luck < 51 then
-            Player.Functions.AddItem(QBCore.Shared.Items["oldtire"].name, 2)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["oldtire"], 'add', 2)
-        elseif luck > 50 and luck < 61 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carjack"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carjack"], 'add', amount)
-        elseif luck > 60 and luck < 71 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carbattery"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carbattery"], 'add', amount)
-        elseif luck > 70 and luck < 81 then
-            Player.Functions.AddItem(QBCore.Shared.Items["gearshift"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["gearshift"], 'add', amount)
-        elseif luck > 80 and luck < 91 then
-            Player.Functions.AddItem(QBCore.Shared.Items["airfilter"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["airfilter"], 'add', amount)
-        elseif luck > 90 and luck < 96 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carradio"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carradio"], 'add')
-        elseif luck > 90 and luck < 96 then
-            Player.Functions.AddItem(QBCore.Shared.Items["sparkplugs"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["sparkplugs"], 'add')       
-        elseif luck == 100 then
-            Player.Functions.AddItem(QBCore.Shared.Items["pistol2"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol2"], 'add')      
+    if not antiEx then 
+        if luck2 > 2 and luck2 < 21 then
+            local luck = math.random(1, 100)
+            local amount = math.random(1, 1)
+            local src = source
+            local Player = QBCore.Functions.GetPlayer(src)
+            if luck > 0 and luck < 26 then
+                Player.Functions.AddItem(QBCore.Shared.Items["rustynails"].name, 2)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["rustynails"], 'add', 2)   
+            elseif luck > 25 and luck < 51 then
+                Player.Functions.AddItem(QBCore.Shared.Items["oldtire"].name, 2)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["oldtire"], 'add', 2)
+            elseif luck > 50 and luck < 61 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carjack"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carjack"], 'add', amount)
+            elseif luck > 60 and luck < 71 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carbattery"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carbattery"], 'add', amount)
+            elseif luck > 70 and luck < 81 then
+                Player.Functions.AddItem(QBCore.Shared.Items["gearshift"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["gearshift"], 'add', amount)
+            elseif luck > 80 and luck < 91 then
+                Player.Functions.AddItem(QBCore.Shared.Items["airfilter"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["airfilter"], 'add', amount)
+            elseif luck > 90 and luck < 96 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carradio"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carradio"], 'add')
+            elseif luck > 90 and luck < 96 then
+                Player.Functions.AddItem(QBCore.Shared.Items["sparkplugs"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["sparkplugs"], 'add')       
+            elseif luck == 100 then
+                Player.Functions.AddItem(QBCore.Shared.Items["pistol2"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol2"], 'add')      
+            end
+            if Config.NotifyType == 'qb' then
+                TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
+            elseif Config.NotifyType == "okok" then
+                TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
+            end
+        else
+            if Config.NotifyType == 'qb' then
+                TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
+            elseif Config.NotifyType == "okok" then
+                TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
+            end
         end
-        if Config.NotifyType == 'qb' then
-            TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
-        elseif Config.NotifyType == "okok" then
-            TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
-        end
-    else
-        if Config.NotifyType == 'qb' then
-            TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
-        elseif Config.NotifyType == "okok" then
-            TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
-        end
+    else 
+        cheaterDeal()
     end
 end)
 
@@ -157,54 +137,57 @@ RegisterNetEvent('mz-scrap:server:ScrapReward3', function(antiEx)
 	local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local luck2 = math.random(1, 20)
-    KeyCheck(source, antiEx)
-    if luck2 > 2 and luck2 < 21 then
-        local luck = math.random(1, 100)
-        local amount = math.random(1, 1)
-        local src = source
-        local Player = QBCore.Functions.GetPlayer(src)
-        if luck > 0 and luck <= 20 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carradio"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carradio"], 'add', amount)   
-        elseif luck > 21 and luck < 41 then
-            Player.Functions.AddItem(QBCore.Shared.Items["sparkplugs"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["sparkplugs"], 'add', amount)
-        elseif luck > 40 and luck < 56 then
-            Player.Functions.AddItem(QBCore.Shared.Items["spoiler"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["spoiler"], 'add', amount)
-        elseif luck > 55 and luck < 71 then
-            Player.Functions.AddItem(QBCore.Shared.Items["cardoor"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["cardoor"], 'add', amount)
-        elseif luck > 70 and luck < 81 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carhood"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carhood"], 'add', amount)
-        elseif luck > 80 and luck < 91 then
-            Player.Functions.AddItem(QBCore.Shared.Items["cargrill"].name, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["cargrill"], 'add', amount)
-        elseif luck > 90 and luck < 95 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carrim"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carrim"], 'add')
-        elseif luck > 94 and luck < 99 then
-            Player.Functions.AddItem(QBCore.Shared.Items["carengine"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carengine"], 'add')
-        elseif luck == 99 then
-            Player.Functions.AddItem(QBCore.Shared.Items["pistol3"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol3"], 'add')           
-        elseif luck == 100 then
-            Player.Functions.AddItem(QBCore.Shared.Items["pistol4"].name, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol4"], 'add')      
+    if not antiEx then 
+        if luck2 > 2 and luck2 < 21 then
+            local luck = math.random(1, 100)
+            local amount = math.random(1, 1)
+            local src = source
+            local Player = QBCore.Functions.GetPlayer(src)
+            if luck > 0 and luck <= 20 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carradio"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carradio"], 'add', amount)   
+            elseif luck > 21 and luck < 41 then
+                Player.Functions.AddItem(QBCore.Shared.Items["sparkplugs"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["sparkplugs"], 'add', amount)
+            elseif luck > 40 and luck < 56 then
+                Player.Functions.AddItem(QBCore.Shared.Items["spoiler"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["spoiler"], 'add', amount)
+            elseif luck > 55 and luck < 71 then
+                Player.Functions.AddItem(QBCore.Shared.Items["cardoor"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["cardoor"], 'add', amount)
+            elseif luck > 70 and luck < 81 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carhood"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carhood"], 'add', amount)
+            elseif luck > 80 and luck < 91 then
+                Player.Functions.AddItem(QBCore.Shared.Items["cargrill"].name, amount)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["cargrill"], 'add', amount)
+            elseif luck > 90 and luck < 95 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carrim"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carrim"], 'add')
+            elseif luck > 94 and luck < 99 then
+                Player.Functions.AddItem(QBCore.Shared.Items["carengine"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["carengine"], 'add')
+            elseif luck == 99 then
+                Player.Functions.AddItem(QBCore.Shared.Items["pistol3"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol3"], 'add')           
+            elseif luck == 100 then
+                Player.Functions.AddItem(QBCore.Shared.Items["pistol4"].name, 1)
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items["pistol4"], 'add')      
+            end
+            if Config.NotifyType == 'qb' then
+                TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
+            elseif Config.NotifyType == "okok" then
+                TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
+            end
+        else
+            if Config.NotifyType == 'qb' then
+                TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
+            elseif Config.NotifyType == "okok" then
+                TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
+            end
         end
-        if Config.NotifyType == 'qb' then
-            TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
-        elseif Config.NotifyType == "okok" then
-            TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
-        end
-    else
-        if Config.NotifyType == 'qb' then
-            TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
-        elseif Config.NotifyType == "okok" then
-            TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
-        end
+    else 
+        cheaterDeal()
     end
 end)
 
@@ -262,12 +245,12 @@ RegisterServerEvent('mz-scrap:server:GetRubber', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.Rubberoutputlow, Config.Rubberoutputhigh)
-    if Config.debugScrapOpt then 
-        print(antiEx)
+    if not antiEx then 
+        Player.Functions.AddItem("rubber", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['rubber'], "add", amount)
+    else 
+        cheaterDeal()
     end
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("rubber", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['rubber'], "add", amount)
 end)
 
 ---------
@@ -285,11 +268,11 @@ RegisterServerEvent('mz-scrap:server:CleanNails', function()
                 TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['rustynails'], "remove", Config.nailsneeded)
                 TriggerClientEvent("mz-scrap:client:CleanNailsMinigame", src)
             else
-            if Config.NotifyType == 'qb' then
-                TriggerClientEvent('QBCore:Notify', src, "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 'error')
-            elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "NEED MATERIALS", "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 3500, 'error')
-            end
+                if Config.NotifyType == 'qb' then
+                    TriggerClientEvent('QBCore:Notify', src, "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 'error')
+                elseif Config.NotifyType == "okok" then
+                    TriggerClientEvent('okokNotify:Alert', source, "NEED MATERIALS", "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 3500, 'error')
+                end
             end
         end
     end
@@ -300,13 +283,16 @@ RegisterServerEvent('mz-scrap:server:GetMetalscrap', function(antiEx)
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.metaloutputlow, Config.metaloutputhigh)
     local chance = math.random(1, 100)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("metalscrap", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
-    Wait(3000)
-    if chance < 20 then
-        Player.Functions.RemoveItem("wd40", 1)
-        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['wd40'], "remove", 1)
+    if not antiEx then 
+        Player.Functions.AddItem("metalscrap", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
+        Wait(3000)
+        if chance < 20 then
+            Player.Functions.RemoveItem("wd40", 1)
+            TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['wd40'], "remove", 1)
+        end
+    else 
+        cheaterDeal()
     end
 end)
 
@@ -339,9 +325,12 @@ RegisterServerEvent('mz-scrap:server:GetElectricscrap', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.elecoutputlow, Config.elecoutputhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("electronicscrap", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['electronicscrap'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("electronicscrap", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['electronicscrap'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 ------------
@@ -373,18 +362,24 @@ RegisterServerEvent('mz-scrap:server:GetMetals', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.jacksmetaloutputlow, Config.jacksmetaloutputhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("metalscrap", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("metalscrap", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 RegisterServerEvent('mz-scrap:server:GetMetals2', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.jackssteeloutputlow, Config.jackssteeloutputlow)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("steel", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['steel'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("steel", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['steel'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 ------------
@@ -416,18 +411,24 @@ RegisterServerEvent('mz-scrap:server:GetCardoormats', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.doorglasslow , Config.doorglasshigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("glass", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['glass'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("glass", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['glass'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 RegisterServerEvent('mz-scrap:server:GetCardoormats2', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.doorironlow, Config.doorironhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("iron", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['iron'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("iron", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['iron'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 ------------
@@ -458,17 +459,23 @@ end)
 RegisterServerEvent('mz-scrap:server:GetCarhoodmats', function(antiEx)
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.hoodscraplow, Config.hoodscraphigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("metalscrap", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("metalscrap", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 RegisterServerEvent('mz-scrap:server:GetCarhoodmats2', function(antiEx)
     local Player = QBCore.Functions.GetPlayer(source)
     local amount2 = math.random(Config.hoodcopperlow, Config.hoodcopperhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("copper", amount2)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['copper'], "add", amount2)
+    if not antiEx then 
+        Player.Functions.AddItem("copper", amount2)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['copper'], "add", amount2)
+    else 
+        cheaterDeal()
+    end
 end)
 
 --------------
@@ -500,36 +507,48 @@ RegisterServerEvent('mz-scrap:server:GetCarenginemats', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.engineironlow, Config.engineironhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("iron", amount)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['iron'], "add", amount)
+    if not antiEx then 
+        Player.Functions.AddItem("iron", amount)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['iron'], "add", amount)
+    else 
+        cheaterDeal()
+    end
 end)
 
 RegisterServerEvent('mz-scrap:server:GetCarenginemats2', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount2 = math.random(Config.enginecopperlow, Config.enginecopperhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("copper", amount2)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['copper'], "add", amount2)
+    if not antiEx then 
+        Player.Functions.AddItem("copper", amount2)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['copper'], "add", amount2)
+    else 
+        cheaterDeal()
+    end
 end)
 
 RegisterServerEvent('mz-scrap:server:GetCarenginemats3', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount3 = math.random(Config.enginesteellow, Config.enginesteelhigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("steel", amount3)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['steel'], "add", amount3)
+    if not antiEx then 
+        Player.Functions.AddItem("steel", amount3)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['steel'], "add", amount3)
+    else 
+        cheaterDeal()
+    end
 end)
 
 RegisterServerEvent('mz-scrap:server:GetCarenginemats4', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount4 = math.random(Config.enginescraplow, Config.enginescraphigh)
-    KeyCheck(source, antiEx)
-    Player.Functions.AddItem("metalscrap", amount4)
-    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount4)
+    if not antiEx then 
+        Player.Functions.AddItem("metalscrap", amount4)
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount4)
+    else 
+        cheaterDeal()
+    end
 end)
 
 ----------
@@ -555,14 +574,7 @@ QBCore.Functions.CreateCallback('mz-scrap:server:getInv', function(source, cb)
     return cb(inventory)
 end)
 
-function KeyCheck(source, antiEx)
-    if antiEx ~= ScrapKey() then 
-        local user = GetPlayerName(source)
-        DropPlayer(source,'Nice try cheater.')
-        print("Cheater")
-    else 
-        if Config.debugScrapOpt then 
-            print("ScrapKey matches. Proceeding")
-        end 
-    end
+function cheaterDeal()
+    local user = GetPlayerName(source)
+    DropPlayer(source,'Nice try cheater.')
 end

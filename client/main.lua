@@ -11,6 +11,7 @@ local FailedAttemps = 0
 local craftcheck = false
 local craftprocesscheck = false
 local craftparse = true 
+local antiEx = true 
 
 cachedWreck = {}
 
@@ -54,13 +55,6 @@ DrawText3Ds = function(x, y, z, text)
     ClearDrawOrigin()
 end
 
-QBCore.Functions.TriggerCallback('mz-scrap:GetKey', function(result)
-    Key = result
-end)
-    
-function ScrapKey()
-    return Key
-end
 
 -------------
 --SCRAPPING--
@@ -194,7 +188,9 @@ ExtractScrap = function(entity)
         Wait(500)
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         cachedWreck[entity] = true
-        TriggerServerEvent('mz-scrap:server:ScrapReward', ScrapKey())
+        antiEx = false 
+        TriggerServerEvent('mz-scrap:server:ScrapReward', antiEx)
+        antiEx = true 
         ClearPedTasks(PlayerPedId())
         StopAnimTask(PlayerPedId(), "amb@world_human_welding@male@base", "base", 1.0)
         searching = false
@@ -385,7 +381,9 @@ ExtractScrap2 = function(entity)
     }, {}, {}, function() -- Done
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         cachedWreck[entity] = true
-        TriggerServerEvent('mz-scrap:server:ScrapReward2', ScrapKey())
+        antiEx = false 
+        TriggerServerEvent('mz-scrap:server:ScrapReward2', antiEx)
+        antiEx = true 
         Wait(1000)
         local successchance = math.random(1, 100)
         if successchance <= Config.screwdriversuccess then 
@@ -587,7 +585,9 @@ ExtractScrap3 = function(entity)
         searching = false
         salvaging = false 
         cachedWreck[entity] = true
-        TriggerServerEvent('mz-scrap:server:ScrapReward3', ScrapKey())
+        antiEx = false
+        TriggerServerEvent('mz-scrap:server:ScrapReward3', antiEx)
+        antiEx = true 
         ClearPedTasks(PlayerPedId())
         StopAnimTask(PlayerPedId(), "amb@world_human_welding@male@base", "base", 1.0)
         Wait(500)
@@ -785,7 +785,9 @@ function BreakTiresProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetRubber", ScrapKey())
+        antiEx = false
+        TriggerServerEvent("mz-scrap:server:GetRubber", antiEx)
+        antiEx = true 
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
@@ -968,7 +970,9 @@ function CleanNailsProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetMetalscrap", ScrapKey())
+        antiEx = false 
+        TriggerServerEvent("mz-scrap:server:GetMetalscrap", antiEx)
+        antiEx = true 
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
@@ -1138,7 +1142,9 @@ function BreakRadioProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetElectricscrap", ScrapKey())
+        antiEx = false
+        TriggerServerEvent("mz-scrap:server:GetElectricscrap", antiEx)
+        antiEx = true 
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
@@ -1308,9 +1314,13 @@ function BreakCarjackProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetMetals", ScrapKey())
+        antiEx = false  
+        TriggerServerEvent("mz-scrap:server:GetMetals", antiEx)
+        antiEx = true 
         Wait(1000)
-        TriggerServerEvent("mz-scrap:server:GetMetals2", ScrapKey())
+        antiEx = false  
+        TriggerServerEvent("mz-scrap:server:GetMetals2", antiEx)
+        antiEx = true 
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
@@ -1478,9 +1488,13 @@ function BreakCardoorProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetCardoormats", ScrapKey())
+        antiEx = false  
+        TriggerServerEvent("mz-scrap:server:GetCardoormats", antiEx)
+        antiEx = true  
         Wait(1000)
-        TriggerServerEvent("mz-scrap:server:GetCardoormats2", ScrapKey())
+        antiEx = false  
+        TriggerServerEvent("mz-scrap:server:GetCardoormats2", antiEx)
+        antiEx = true  
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
@@ -1648,9 +1662,13 @@ function BreakCarhoodProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetCarhoodmats", ScrapKey())
+        antiEx = false  
+        TriggerServerEvent("mz-scrap:server:GetCarhoodmats", antiEx)
+        antiEx = true  
         Wait(1000)
-        TriggerServerEvent("mz-scrap:server:GetCarhoodmats2", ScrapKey())
+        antiEx = false  
+        TriggerServerEvent("mz-scrap:server:GetCarhoodmats2", antiEx)
+        antiEx = true  
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
@@ -1831,13 +1849,21 @@ function BreakCarengineProcess()
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerServerEvent("mz-scrap:server:GetCarenginemats", ScrapKey())
+        antiEx = false 
+        TriggerServerEvent("mz-scrap:server:GetCarenginemats", antiEx)
+        antiEx = true
         Wait(1000)
-        TriggerServerEvent("mz-scrap:server:GetCarenginemats2", ScrapKey())
+        antiEx = false 
+        TriggerServerEvent("mz-scrap:server:GetCarenginemats2", antiEx)
+        antiEx = true
         Wait(1000)
-        TriggerServerEvent("mz-scrap:server:GetCarenginemats3", ScrapKey())
+        antiEx = false 
+        TriggerServerEvent("mz-scrap:server:GetCarenginemats3", antiEx)
+        antiEx = true
         Wait(1000)
-        TriggerServerEvent("mz-scrap:server:GetCarenginemats4", ScrapKey())
+        antiEx = false 
+        TriggerServerEvent("mz-scrap:server:GetCarenginemats4", antiEx)
+        antiEx = true
         TriggerEvent('animations:client:EmoteCommandStart', {"c"})
         ClearPedTasks(PlayerPedId())
         craftcheck = false
