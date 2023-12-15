@@ -41,11 +41,11 @@ QBCore.Functions.CreateCallback('mz-scrap:GetKey', function(source, cb)
     cb(result)
 end)
 
-RegisterNetEvent('mz-scrap:server:ScrapReward', function(ClientKey)
+RegisterNetEvent('mz-scrap:server:ScrapReward', function(antiEx)
 	local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local luck2 = math.random(1, 20)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     if luck2 > 2 and luck2 < 21 then
         local luck = math.random(1, 100)
         local amount = math.random(1, 1)
@@ -97,11 +97,11 @@ end)
 -- TIER 2 EXTRACT --
 --------------------
 
-RegisterNetEvent('mz-scrap:server:ScrapReward2', function(ClientKey)
+RegisterNetEvent('mz-scrap:server:ScrapReward2', function(antiEx)
 	local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local luck2 = math.random(1, 20)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     if luck2 > 2 and luck2 < 21 then
         local luck = math.random(1, 100)
         local amount = math.random(1, 1)
@@ -153,11 +153,11 @@ end)
 -- TIER 3 EXTRACT --
 --------------------
 
-RegisterNetEvent('mz-scrap:server:ScrapReward3', function(ClientKey)
+RegisterNetEvent('mz-scrap:server:ScrapReward3', function(antiEx)
 	local src = source
     local ply = QBCore.Functions.GetPlayer(src)
     local luck2 = math.random(1, 20)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     if luck2 > 2 and luck2 < 21 then
         local luck = math.random(1, 100)
         local amount = math.random(1, 1)
@@ -258,14 +258,14 @@ RegisterServerEvent('mz-scrap:server:BreakdownTires', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetRubber', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetRubber', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.Rubberoutputlow, Config.Rubberoutputhigh)
     if Config.debugScrapOpt then 
-        print(ClientKey)
+        print(antiEx)
     end
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("rubber", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['rubber'], "add", amount)
 end)
@@ -295,12 +295,12 @@ RegisterServerEvent('mz-scrap:server:CleanNails', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetMetalscrap', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetMetalscrap', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.metaloutputlow, Config.metaloutputhigh)
     local chance = math.random(1, 100)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("metalscrap", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
     Wait(3000)
@@ -335,11 +335,11 @@ RegisterServerEvent('mz-scrap:server:ExtractRadio', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetElectricscrap', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetElectricscrap', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.elecoutputlow, Config.elecoutputhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("electronicscrap", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['electronicscrap'], "add", amount)
 end)
@@ -369,20 +369,20 @@ RegisterServerEvent('mz-scrap:server:BreakdownCarjack', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetMetals', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetMetals', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.jacksmetaloutputlow, Config.jacksmetaloutputhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("metalscrap", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
 end)
 
-RegisterServerEvent('mz-scrap:server:GetMetals2', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetMetals2', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.jackssteeloutputlow, Config.jackssteeloutputlow)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("steel", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['steel'], "add", amount)
 end)
@@ -412,20 +412,20 @@ RegisterServerEvent('mz-scrap:server:BreakdownCardoor', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCardoormats', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCardoormats', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.doorglasslow , Config.doorglasshigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("glass", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['glass'], "add", amount)
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCardoormats2', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCardoormats2', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.doorironlow, Config.doorironhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("iron", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['iron'], "add", amount)
 end)
@@ -455,18 +455,18 @@ RegisterServerEvent('mz-scrap:server:BreakdownCarhood', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCarhoodmats', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCarhoodmats', function(antiEx)
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.hoodscraplow, Config.hoodscraphigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("metalscrap", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount)
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCarhoodmats2', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCarhoodmats2', function(antiEx)
     local Player = QBCore.Functions.GetPlayer(source)
     local amount2 = math.random(Config.hoodcopperlow, Config.hoodcopperhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("copper", amount2)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['copper'], "add", amount2)
 end)
@@ -496,38 +496,38 @@ RegisterServerEvent('mz-scrap:server:BreakdownCarengine', function()
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCarenginemats', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCarenginemats', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount = math.random(Config.engineironlow, Config.engineironhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("iron", amount)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['iron'], "add", amount)
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCarenginemats2', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCarenginemats2', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount2 = math.random(Config.enginecopperlow, Config.enginecopperhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("copper", amount2)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['copper'], "add", amount2)
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCarenginemats3', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCarenginemats3', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount3 = math.random(Config.enginesteellow, Config.enginesteelhigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("steel", amount3)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['steel'], "add", amount3)
 end)
 
-RegisterServerEvent('mz-scrap:server:GetCarenginemats4', function(ClientKey)
+RegisterServerEvent('mz-scrap:server:GetCarenginemats4', function(antiEx)
     local src = source
     local Player = QBCore.Functions.GetPlayer(source)
     local amount4 = math.random(Config.enginescraplow, Config.enginescraphigh)
-    KeyCheck(source, ClientKey)
+    KeyCheck(source, antiEx)
     Player.Functions.AddItem("metalscrap", amount4)
     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items['metalscrap'], "add", amount4)
 end)
@@ -555,8 +555,8 @@ QBCore.Functions.CreateCallback('mz-scrap:server:getInv', function(source, cb)
     return cb(inventory)
 end)
 
-function KeyCheck(source, ClientKey)
-    if ClientKey ~= ScrapKey() then 
+function KeyCheck(source, antiEx)
+    if antiEx ~= ScrapKey() then 
         local user = GetPlayerName(source)
         DropPlayer(source,'Nice try cheater.')
         print("Cheater")
