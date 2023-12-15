@@ -12,13 +12,13 @@
 - progressbar
 - qb-target
 - qb-skillbar
-- OPTIONAL: (Configured to work with okokNotify as well as base qb-core notifications).
+- OPTIONAL: (Configured to work with okokNotify as well as base qb-core notifications and ps-ui).
 
 ### Installation Instruction
 
 ### A. MZ-SKILLS
 
-1. Ensure that mz-skills forms part of your running scripts. 
+1. Ensure that mz-skills forms part of your running scripts if using this script with mz-skills. 
 
 2. Run the "skills.sql" sql file and open the database. (This will add a data table to the existing "players" database which will hold the skill value for "scrapping" as well as other jobs)
 
@@ -26,6 +26,7 @@
 
 3. Add the following items to qb-core/shared/items.lua:
 
+```lua
 	['screwdriver'] 				 = {['name'] = 'screwdriver', 			  		['label'] = 'Screwdriver', 				['weight'] = 100, 		['type'] = 'item', 		['image'] = 'screwdriver.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = false,   ['combinable'] = nil,   ['description'] = 'A flathead screwdriver. I mean sure the handle is a bit worn but this thing probably works.'},
 	['blowtorch'] 				 	 = {['name'] = 'blowtorch', 			    	['label'] = 'Blowtorch', 				['weight'] = 3500, 		['type'] = 'item', 		['image'] = 'blowtorch.png', 			['unique'] = true, 		['useable'] = false, 	['shouldClose'] = false,   ['combinable'] = nil,   ['description'] = 'A high propane instrument used for welding and other things...'},
 	['wd40'] 				 	 	 = {['name'] = 'wd40', 			    			['label'] = 'WD-40', 					['weight'] = 250, 		['type'] = 'item', 		['image'] = 'wd40.png', 				['unique'] = true, 		['useable'] = false, 	['shouldClose'] = false,   ['combinable'] = nil,   ['description'] = 'A chemical compound with multiple purposes, including the removal of corrosion.'},
@@ -54,11 +55,13 @@
 	["cargrill"]         	 	 = {["name"] = "cargrill",         			["label"] = "Car Grill",    			["weight"] = 850,       ["type"] = "item",      ["image"] = "cargrill.png",     		["unique"] = false,     ["useable"] = true,     ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "Front grill chrome alloy from a motor vehicle."},
 	["carengine"]         	 	 = {["name"] = "carengine",         		["label"] = "Engine Block",    			["weight"] = 2250,      ["type"] = "item",      ["image"] = "carengine.png",     		["unique"] = false,     ["useable"] = true,     ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "Combustion engine from a motor vehicle."},
 	["carhood"]         	 	 = {["name"] = "carhood",         			["label"] = "Car Hood",    				["weight"] = 1450,      ["type"] = "item",      ["image"] = "carhood.png",     			["unique"] = false,     ["useable"] = true,     ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "The hood component of a motor vehicle."},
+```
 
 4. Add the images which appear in the "images" folder to your inventory images folder. If using lj-inventory, add the images to: lj-inventory/html/images/
 
 5. Depending on how you want to incorporate the screwdriver, blowtorch and wd40 - you can make these items craftable or rare drops from other activities or you can simply add them to the hardware section of qb-shops. If you wish to simply make them purchaseable, navigate to line 257 of qb-shops/config.lua and add the following after line 257:
 
+```lua
         [16] = {
             name = "screwdriver",
             price = 250,
@@ -83,6 +86,7 @@
             type = "item",
             slot = 18,
         },		
+```
 
 6. If you attend to all of the above steps you will need to restart the server in order for the new added items to be recognised by qb-core. Starting the mz-scrap resource without doing this will cause errors. Please restart your server ensuring that mz-scrap is ensured/starts after qb-core starts (ideally it should just form part of your [qb] folder). Happy scrapping!
 
