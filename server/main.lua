@@ -191,9 +191,9 @@ RegisterNetEvent('mz-scrap:server:ScrapReward3', function(antiEx)
     end
 end)
 
-RegisterServerEvent('mz-scrap:server:ScrapReward', function()
-    QBCore.Functions.BanInjection(source, 'mz-scrap:server:ScrapReward')
-end)
+-- RegisterServerEvent('mz-scrap:server:ScrapReward', function()
+--     QBCore.Functions.BanInjection(source, 'mz-scrap:server:ScrapReward')
+-- end)
 
 ------------------
 --PARTS BREAKING--
