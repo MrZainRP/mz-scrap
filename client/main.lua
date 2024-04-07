@@ -662,7 +662,48 @@ end)
 
 RegisterNetEvent('mz-scrap:client:BreakdownTiresMinigame', function(source)
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            BreakTiresProcess()
+            Wait(500)
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You extract the good rubber from the wrecked tires', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("RECEIVED RUBBER", "You extract the good rubber from the wrecked tires", 3500, "success")
+            end   
+            Wait(500)
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.tireXPlow, Config.tireXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.tireXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You cut too far and ruin the tires...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("TIRES RUINED", "You cut too far and ruin the tires...", 3500, "error")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local deteriorate = -Config.tireXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.tireXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.tireXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakTiresParse = math.random(Config.tireparselow, Config.tireparsehigh)
         local breakTiresTime = math.random(Config.tiretimepslow, Config.tiretimepshigh) 
         exports['ps-ui']:Circle(function(success)
@@ -848,7 +889,47 @@ end)
 
 RegisterNetEvent('mz-scrap:client:CleanNailsMinigame', function(source)
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            CleanNailsProcess()
+            Wait(500)
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.nailXPlow, Config.nailXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.nailXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You obtain some clean metal scrap', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("METAL CLEANED", "You obtain some clean metal scrap", 3500, "success")
+            end   
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('The rusted nails disintegrate...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("BAD NAILS", "The rusted nails disintegrate...", 3500, "error")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local deteriorate = -Config.nailXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.nailXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.nailXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end   
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakNailsParse = math.random(Config.nailparselow, Config.nailparsehigh)
         local breakNailsTime = math.random(Config.nailtimepslow, Config.nailtimepshigh) 
         exports['ps-ui']:Circle(function(success)
@@ -1020,7 +1101,47 @@ end)
 
 RegisterNetEvent('mz-scrap:client:BreakRadioMinigame', function(source) 
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            BreakRadioProcess()
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You extract some electronic boards from the radio', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("ELECTRONIC BOARDS", "You extract some electronic boards from the radio", 3500, "success")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.radioXPlow, Config.radioXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.radioXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end 
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You are not going to be able to salvage these electronic boards...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("HAND SLIPPED", "You are not going to be able to salvage these electronic boards...", 3500, "error")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local deteriorate = -Config.radioXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.radioXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.radioXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakradioParse = math.random(Config.radioparselow, Config.radioparsehigh)
         local breakradioTime = math.random(Config.radiotimepslow, Config.radiotimepshigh) 
         exports['ps-ui']:Circle(function(success)
@@ -1192,7 +1313,47 @@ end)
 
 RegisterNetEvent('mz-scrap:client:BreakCarjackMinigame', function(source)
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            BreakRadioProcess()
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You extract some electronic boards from the radio', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("ELECTRONIC BOARDS", "You extract some electronic boards from the radio", 3500, "success")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.radioXPlow, Config.radioXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.radioXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end 
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You are not going to be able to salvage these electronic boards...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("HAND SLIPPED", "You are not going to be able to salvage these electronic boards...", 3500, "error")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local deteriorate = -Config.radioXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.radioXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.radioXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakjackParse = math.random(Config.jackparselow, Config.jackparsehigh)
         local breakjackTime = math.random(Config.jacktimepslow, Config.jacktimepshigh) 
         exports['ps-ui']:Circle(function(success)
@@ -1368,7 +1529,46 @@ end)
 
 RegisterNetEvent('mz-scrap:client:BreakCardoorMinigame', function(source)
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            BreakCardoorProcess()
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You extract some glass and metal from the doors', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("MATERIAL EXTRACTED", "You extract some glass and metal from the doors", 3500, "success")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.doorsXPlow, Config.doorsXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.doorsXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end     
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('The car door breaks into useless pieces...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("CAR DOORS RUINED", "The car door breaks into useless pieces...", 3500, "error")
+            end
+            if Config.mzskills then 
+                local deteriorate = -Config.doorsXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.doorsXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.doorsXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end  
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakdoorParse = math.random(Config.doorparselow, Config.doorparsehigh)
         local breakdoorTime = math.random(Config.doortimepslow, Config.doortimepshigh) 
         exports['ps-ui']:Circle(function(success)
@@ -1542,7 +1742,46 @@ end)
 
 RegisterNetEvent('mz-scrap:client:BreakCarhoodMinigame', function(source)
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            BreakCardoorProcess()
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You extract some glass and metal from the doors', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("MATERIAL EXTRACTED", "You extract some glass and metal from the doors", 3500, "success")
+            end
+            Wait(500)
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.doorsXPlow, Config.doorsXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.doorsXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end     
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('The car door breaks into useless pieces...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("CAR DOORS RUINED", "The car door breaks into useless pieces...", 3500, "error")
+            end
+            if Config.mzskills then 
+                local deteriorate = -Config.doorsXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.doorsXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.doorsXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end  
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakhoodParse = math.random(Config.hoodparselow, Config.hoodparsehigh)
         local breakhoodTime = math.random(Config.hoodtimepslow, Config.hoodtimepshigh) 
         exports['ps-ui']:Circle(function(success)
@@ -1731,7 +1970,45 @@ end)
 
 RegisterNetEvent('mz-scrap:client:BreakCarengineMinigame', function(source)
     TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
-    if Config.SkillCheck == "ps" then 
+    if Config.SkillCheck == "ox" then 
+        local success = lib.skillCheck({'easy', 'easy', 'medium'}, {'w', 'a', 's', 'd'})
+        if success then
+            BreakCarengineProcess()
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('You extract some useful metal from the old engine!', "success", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("MATERIAL EXTRACTED", "You extract some useful metal from the old engine!", 3500, "success")
+            end
+            if Config.mzskills then 
+                local BetterXP = math.random(Config.engineXPlow, Config.engineXPhigh)
+                local multiplier = math.random(1, 4)
+                if multiplier > 3 then
+                    skillup = BetterXP
+                else
+                    skillup = Config.engineXPlow
+                end
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, skillup)
+            end     
+            craftprocesscheck = false
+        else
+            if Config.NotifyType == 'qb' then
+                QBCore.Functions.Notify('The car engine leaks black fluid... Ruined...', "error", 3500)
+            elseif Config.NotifyType == "okok" then
+                exports['okokNotify']:Alert("CAR ENGINE RUINED", "The car engine leaks black fluid... Ruined...", 3500, "error")
+            end
+            if Config.mzskills then 
+                local deteriorate = -Config.engineXPloss
+                exports["mz-skills"]:UpdateSkill(Config.ScrapXPSkill, deteriorate)
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('-'..Config.engineXPloss..'XP to '..Config.ScrapXPSkill..'.', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("SKILLS", '-'..Config.engineXPloss..'XP to '..Config.ScrapXPSkill..'.', 3500, "error")
+                end   
+            end
+            craftprocesscheck = false
+            ClearPedTasks(PlayerPedId())
+        end
+    elseif Config.SkillCheck == "ps" then 
         local breakengineParse = math.random(Config.engineparselow, Config.engineparsehigh)
         local breakengineTime = math.random(Config.enginetimepslow, Config.enginetimepshigh) 
         exports['ps-ui']:Circle(function(success)
