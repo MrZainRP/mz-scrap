@@ -54,14 +54,14 @@ RegisterNetEvent('mz-scrap:server:ScrapReward', function(antiEx)
             if Config.NotifyType == 'qb' then
                 TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
             elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
+                TriggerClientEvent('okokNotify:Alert', src, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
             end
         else
             Wait(100)
             if Config.NotifyType == 'qb' then
                 TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
             elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
+                TriggerClientEvent('okokNotify:Alert', src, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
             end
         end
     else 
@@ -115,13 +115,13 @@ RegisterNetEvent('mz-scrap:server:ScrapReward2', function(antiEx)
             if Config.NotifyType == 'qb' then
                 TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
             elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
+                TriggerClientEvent('okokNotify:Alert', src, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
             end
         else
             if Config.NotifyType == 'qb' then
                 TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
             elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
+                TriggerClientEvent('okokNotify:Alert', src, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
             end
         end
     else 
@@ -177,13 +177,13 @@ RegisterNetEvent('mz-scrap:server:ScrapReward3', function(antiEx)
             if Config.NotifyType == 'qb' then
                 TriggerClientEvent('QBCore:Notify', src, "You extracted some salvaged scrap!", 'success')
             elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
+                TriggerClientEvent('okokNotify:Alert', src, "ITEM FOUND!", "You extracted some salvaged scrap!", 3500, 'success')
             end
         else
             if Config.NotifyType == 'qb' then
                 TriggerClientEvent('QBCore:Notify', src, "You did not manage to find anything useful.", 'success')
             elseif Config.NotifyType == "okok" then
-                TriggerClientEvent('okokNotify:Alert', source, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
+                TriggerClientEvent('okokNotify:Alert', src, "NOTHING HERE...", "You did not manage to find anything useful.", 3500, 'error')
             end
         end
     else 
@@ -234,7 +234,7 @@ RegisterServerEvent('mz-scrap:server:BreakdownTires', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You do not have enough worn tires to process (Need "..Config.tiresneeded..")", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NO TIRES?", "You do not have enough worn tires to process (Need "..Config.tiresneeded..")", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NO TIRES?", "You do not have enough worn tires to process (Need "..Config.tiresneeded..")", 3500, 'error')
                 end
             end
         end
@@ -271,7 +271,7 @@ RegisterServerEvent('mz-scrap:server:CleanNails', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NEED MATERIALS", "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NEED MATERIALS", "You need "..Config.nailsneeded.." Rusty Nails and 1x WD-40.", 3500, 'error')
                 end
             end
         end
@@ -314,7 +314,7 @@ RegisterServerEvent('mz-scrap:server:ExtractRadio', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You need "..Config.radiosneeded.." car radios to start work", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NEED RADIOS", "You need "..Config.radiosneeded.." car radios to start work", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NEED RADIOS", "You need "..Config.radiosneeded.." car radios to start work", 3500, 'error')
                 end
             end
         end
@@ -351,7 +351,7 @@ RegisterServerEvent('mz-scrap:server:BreakdownCarjack', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You need "..Config.jacksneeded.." car jacks to start work", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NEED JACKS", "You need "..Config.jacksneeded.." car jacks to start work", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NEED JACKS", "You need "..Config.jacksneeded.." car jacks to start work", 3500, 'error')
                 end
             end
         end
@@ -400,7 +400,7 @@ RegisterServerEvent('mz-scrap:server:BreakdownCardoor', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You need "..Config.doorsneeded.." car doors to start work.", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NEED DOORS", "You need "..Config.doorsneeded.." car doors to start work.", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NEED DOORS", "You need "..Config.doorsneeded.." car doors to start work.", 3500, 'error')
                 end    
             end
         end
@@ -449,7 +449,7 @@ RegisterServerEvent('mz-scrap:server:BreakdownCarhood', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You need "..Config.hoodneeded.." car hoods to start work.", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NEED HOODS", "You need "..Config.hoodneeded.." car hoods to start work.", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NEED HOODS", "You need "..Config.hoodneeded.." car hoods to start work.", 3500, 'error')
                 end   
             end
         end
@@ -496,7 +496,7 @@ RegisterServerEvent('mz-scrap:server:BreakdownCarengine', function()
                 if Config.NotifyType == 'qb' then
                     TriggerClientEvent('QBCore:Notify', src, "You need an engine bloc to start work.", 'error')
                 elseif Config.NotifyType == "okok" then
-                    TriggerClientEvent('okokNotify:Alert', source, "NEED ENGINE", "You need an engine bloc to start work.", 3500, 'error')
+                    TriggerClientEvent('okokNotify:Alert', src, "NEED ENGINE", "You need an engine bloc to start work.", 3500, 'error')
                 end 
             end
         end

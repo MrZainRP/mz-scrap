@@ -74,33 +74,61 @@ CreateThread(function()
             tier3Check = true 
         end 
     end)
-    exports['qb-target']:AddTargetModel(Config.Objects, {
-        options = {
+    if Config.TargetType == "qb" then 
+        exports['qb-target']:AddTargetModel(Config.Objects, {
+            options = {
+                {
+                    num = 1, 
+                    type = "client",
+                    event = "mz-scrap:client:salvage",
+                    icon = "fas fa-search",
+                    label = "Use Hands",
+                },
+                {
+                    num = 2, 
+                    type = "client",
+                    event = "mz-scrap:client:salvage2",
+                    icon = "fas fa-screwdriver",
+                    label = "Use "..Config.ScrewdriverRequiredItemLabel,
+                },
+                {
+                    num = 3, 
+                    type = "client",
+                    event = "mz-scrap:client:salvage3",
+                    icon = "fas fa-fire-extinguisher", 
+                    label = "Use "..Config.BlowtorchRequiredItemLabel,
+                },
+            },
+        distance = 0.9
+        })  
+    elseif Config.TargetType == "ox" then 
+        exports.ox_target:addModel(Config.Objects, {
             {
-                num = 1, 
-                type = "client",
                 event = "mz-scrap:client:salvage",
                 icon = "fas fa-search",
                 label = "Use Hands",
+                num = 1,
+                type = "client",
             },
             {
-                num = 2, 
-                type = "client",
                 event = "mz-scrap:client:salvage2",
                 icon = "fas fa-screwdriver",
                 label = "Use "..Config.ScrewdriverRequiredItemLabel,
+                num = 2,
+                type = "client",
             },
             {
-                num = 3, 
-                type = "client",
                 event = "mz-scrap:client:salvage3",
-                icon = "fas fa-fire-extinguisher", 
+                icon = "fas fa-fire-extinguisher",
                 label = "Use "..Config.BlowtorchRequiredItemLabel,
+                num = 3,
+                type = "client",
             },
-        },
-    distance = 0.9
-    })  
- end)
+        })
+    else 
+        print("your Config.TargetType has been set incorrect in config.lua. Pick between 'qb' or 'ox'.")
+    end 
+end)
 
 --------------
 --HAND SCRAP--
@@ -2160,24 +2188,45 @@ end
 -------------------
 
 CreateThread(function()
-    exports['qb-target']:AddBoxZone("sellcarpartszone", vector3(-54.9, 6392.3, 31.62), 1.4, 0.5, {
-        name = "sellcarpartszone",
-        heading = 315,
-        debugPoly = false,
-        minZ = 29.02,
-        maxZ = 33.02,
-        drawDistance = 10.0
-        }, {
-            options = { 
-            {
-                type = "client",
-                event = "mz-scrap:client:openMenu",
-                icon = 'fas fa-car',
-                label = 'Sell Car Parts'
+    if Config.TargetType == "qb" then 
+        exports['qb-target']:AddBoxZone("sellcarpartszone", vector3(-54.9, 6392.3, 31.62), 1.4, 0.5, {
+            name = "sellcarpartszone",
+            heading = 315,
+            debugPoly = false,
+            minZ = 29.02,
+            maxZ = 33.02,
+            drawDistance = 10.0
+            }, {
+                options = { 
+                {
+                    type = "client",
+                    event = "mz-scrap:client:openMenu",
+                    icon = 'fas fa-car',
+                    label = 'Sell Car Parts'
+                },
             },
-        },
-        distance = 1.5,
-     })
+            distance = 1.5,
+        })
+    elseif Config.TargetType == "ox" then 
+        exports.ox_target:addBoxZone({
+            name = "sellcarpartszone",
+            coords = vector3(-54.9, 6392.3, 31.62),
+            size = vec3(1.4, 0.5, 4.0),
+            rotation = 315,
+            options = {
+                {
+                    event = "mz-scrap:client:openMenu",
+                    icon = 'fas fa-car',
+                    label = 'Sell Car Parts',
+                    type = "client",
+                },
+            },
+            distance = 1.5,
+            debug = false,
+        })
+    else 
+        print("your Config.TargetType has been set incorrect in config.lua. Pick between 'qb' or 'ox'.")
+    end 
 end)
 
 RegisterNetEvent('mz-scrap:client:openMenu', function()
@@ -2273,67 +2322,131 @@ end)
 -------------
 
 CreateThread(function()
-    exports['qb-target']:AddBoxZone("mzscrapcrafting", vector3(1176.08, 2635.15, 37.75), 3.6, 1, {
-        name = "mzscrapcrafting",
-        heading = 90,
-        debugPoly = false,
-        minZ = 34.35,
-        maxZ = 38.35,
-        drawDistance = 10.0
-        }, {
-            options = { 
-            {
-                num = 1, 
-                type = "client",
-                event = "mz-scrap:client:BreakdownTires",
-                icon = 'fas fa-cog',
-                label = 'Process old tires',
+    if Config.TargetType == "qb" then
+        exports['qb-target']:AddBoxZone("mzscrapcrafting", vector3(1176.08, 2635.15, 37.75), 3.6, 1, {
+            name = "mzscrapcrafting",
+            heading = 90,
+            debugPoly = false,
+            minZ = 34.35,
+            maxZ = 38.35,
+            drawDistance = 10.0
+            }, {
+                options = { 
+                {
+                    num = 1, 
+                    type = "client",
+                    event = "mz-scrap:client:BreakdownTires",
+                    icon = 'fas fa-cog',
+                    label = 'Process old tires',
+                },
+                {
+                    num = 2,
+                    type = "client",
+                    event = "mz-scrap:client:CleanNails",
+                    icon = 'fas fa-screwdriver',
+                    label = 'Remove rust from nails',
+                },
+                {
+                    num = 3,
+                    type = "client",
+                    event = "mz-scrap:client:BreakdownRadio",
+                    icon = 'fas fa-radio',
+                    label = 'Disassemble car radio', 
+                },
+                {
+                    num = 4,
+                    type = "client",
+                    event = "mz-scrap:client:BreakdownCarjack",
+                    icon = 'fas fa-times',
+                    label = 'Break down car jack', 
+                },
+                {
+                    num = 5,
+                    type = "client",
+                    event = "mz-scrap:client:BreakdownCardoor",
+                    icon = 'fas fa-door-closed',
+                    label = 'Break apart car door', 
+                },
+                {
+                    num = 6,
+                    type = "client",
+                    event = "mz-scrap:client:BreakdownCarhood",
+                    icon = 'fas fa-car',
+                    label = 'Strip car hood', 
+                },
+                {
+                    num = 7,
+                    type = "client",
+                    event = "mz-scrap:client:BreakdownCarengine",
+                    icon = 'fas fa-people-carry',
+                    label = 'Strip engine block', 
+                },
             },
-            {
-                num = 2,
-                type = "client",
-                event = "mz-scrap:client:CleanNails",
-                icon = 'fas fa-screwdriver',
-                label = 'Remove rust from nails',
+            distance = 1.5,
+        })
+    elseif Config.TargetType == "ox" then 
+        exports.ox_target:addBoxZone({
+            name = "mzscrapcrafting",
+            coords = vec3(1176.08, 2635.15, 37.75),
+            size = vec3(3.6, 1, 4.0),
+            rotation = 90,
+            debug = false,
+            options = {
+                {
+                    event = "mz-scrap:client:BreakdownTires",
+                    icon = 'fas fa-cog',
+                    label = 'Process old tires',
+                    type = "client",
+                    num = 1,
+                },
+                {
+                    event = "mz-scrap:client:CleanNails",
+                    icon = 'fas fa-screwdriver',
+                    label = 'Remove rust from nails',
+                    type = "client",
+                    num = 2,
+                },
+                {
+                    event = "mz-scrap:client:BreakdownRadio",
+                    icon = 'fas fa-radio',
+                    label = 'Disassemble car radio',
+                    type = "client",
+                    num = 3,
+                },
+                {
+                    event = "mz-scrap:client:BreakdownCarjack",
+                    icon = 'fas fa-times',
+                    label = 'Break down car jack',
+                    type = "client",
+                    num = 4,
+                },
+                {
+                    event = "mz-scrap:client:BreakdownCardoor",
+                    icon = 'fas fa-door-closed',
+                    label = 'Break apart car door',
+                    type = "client",
+                    num = 5,
+                },
+                {
+                    event = "mz-scrap:client:BreakdownCarhood",
+                    icon = 'fas fa-car',
+                    label = 'Strip car hood',
+                    type = "client",
+                    num = 6,
+                },
+                {
+                    event = "mz-scrap:client:BreakdownCarengine",
+                    icon = 'fas fa-people-carry',
+                    label = 'Strip engine block',
+                    type = "client",
+                    num = 7,
+                },
             },
-            {
-                num = 3,
-                type = "client",
-                event = "mz-scrap:client:BreakdownRadio",
-                icon = 'fas fa-radio',
-                label = 'Disassemble car radio', 
-            },
-            {
-                num = 4,
-                type = "client",
-                event = "mz-scrap:client:BreakdownCarjack",
-                icon = 'fas fa-times',
-                label = 'Break down car jack', 
-            },
-            {
-                num = 5,
-                type = "client",
-                event = "mz-scrap:client:BreakdownCardoor",
-                icon = 'fas fa-door-closed',
-                label = 'Break apart car door', 
-            },
-            {
-                num = 6,
-                type = "client",
-                event = "mz-scrap:client:BreakdownCarhood",
-                icon = 'fas fa-car',
-                label = 'Strip car hood', 
-            },
-            {
-                num = 7,
-                type = "client",
-                event = "mz-scrap:client:BreakdownCarengine",
-                icon = 'fas fa-people-carry',
-                label = 'Strip engine block', 
-            },
-        },
-        distance = 1.5,
-    })
+            distance = 1.5,
+        })
+    else 
+        print("your Config.TargetType has been set incorrect in config.lua. Pick between 'qb' or 'ox'.")
+    end     
 end)
 
 local loadcraft = true

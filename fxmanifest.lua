@@ -4,11 +4,11 @@ game 'gta5'
 
 lua54 'yes'
 
-author 'Mr_Zain - https://discord.gg/CqNYvE3CkA'
+author 'Mr_Zain - https://dsc.gg/mzresources'
 
 description 'mz-scrap - a progression based scrapping resource for qb-core (with or without mz-skill XP integration)'
 
-version '1.5.1'
+version '1.5.2'
 
 shared_scripts {
 	'@qb-core/shared/locale.lua',

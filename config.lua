@@ -16,6 +16,8 @@ Config.debugScrapOpt = true                 -- Set to false to remove debugging 
 
 Config.SkillCheck = "ox"                    -- Change to "skillbar" to use skillbar, change to "ps" to use ps-ui, change to "ox" to use ox_lib
 
+Config.TargetType = "ox"                    -- Switch between "qb" and "ox" depending on what target dependency your server uses.
+
 Config.SellLocation = {
     [1] = {
             coords = vector3(-54.9, 6392.3, 31.62),
