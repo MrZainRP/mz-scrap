@@ -5,7 +5,8 @@
 - Scrapping commences with the player using their hands. Each successful scrap yields low-tier items + low-tier experience
 - Mid-tier scrapping involves the use of a screwdriver. If using a skill check, the skill check is slightly harder, takes slightly longer and produces mid-tier items and mid-tier XP.
 - High-tier scrapping involves the use of a blowtorch. scrapping function is, again, slightly harder, takes slightly longer and produces top-tier items.
-- Certain items obtained from scrapping can be broken down into materials used for crafting in other scripts. 
+- Certain items obtained from scrapping can be broken down into materials used for crafting in other scripts.
+- Thanks to adamdtt (Arctic Gaming) for ox-target code functionality.
 
 ### Dependencies
 - mz-skills (a modified version of qb-skillz (now B1-skillz) made and distributed by Kings#4220 of Burn One Studios - accessible at: https://github.com/Burn-One-Studios/B1-skillz)
