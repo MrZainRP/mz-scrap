@@ -408,8 +408,7 @@ ExtractScrap = function(entity)
         disableMouse = false,
         disableCombat = true,
         DisableControlAction(0, 170, true),
-    }, {
-    }, {}, {}, function() -- Done
+    }, {}, {}, {}, function() -- Done
         Wait(500)
         if Config.mzskills then 
             local BetterXP = math.random(Config.handXPlow, Config.handXPhigh)
@@ -466,8 +465,7 @@ ExtractScrap2 = function(entity)
         disableMouse = false,
         disableCombat = true,
         DisableControlAction(0, 170, true),
-    }, {
-    }, {}, {}, function() -- Done
+    }, {}, {}, {}, function() -- Done
         ClearPedTasks(PlayerPedId())
         cachedWreck[entity] = true
         antiEx = false 
@@ -540,8 +538,7 @@ ExtractScrap3 = function(entity)
         disableMouse = false,
         disableCombat = true,
         DisableControlAction(0, 170, true),
-    }, {
-    }, {}, {}, function() -- Done
+    }, {}, {}, {}, function() -- Done
         ClearPedTasks(PlayerPedId())
         searching = false
         salvaging = false 
@@ -780,140 +777,158 @@ RegisterNetEvent('mz-scrap:client:Breakdown', function(data)
             print("Did player pass the skill-check? ", success)
         end
         if success then 
-            if data.rawMat == "door" then 
-                if QBCore.Functions.HasItem(Config.scrapitem1) then
-                    rawMatType = "door" 
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem1]["name"], image = QBCore.Shared.Items[Config.scrapitem1]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+            TriggerEvent('animations:client:EmoteCommandStart', {"mechanic"})
+            local craftTime = math.random(Config.craftProgLow, Config.craftProgHigh)
+            QBCore.Functions.Progressbar("search_register", "Breaking down materials...", craftTime , false, true, {
+                disableMovement = true,
+                disableCarMovement = true,
+                disableMouse = false,
+                disableCombat = true,
+                DisableControlAction(0, 170, true),
+            }, {}, {}, {}, function() 
+                if data.rawMat == "door" then 
+                    if QBCore.Functions.HasItem(Config.scrapitem1) then
+                        rawMatType = "door" 
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem1]["name"], image = QBCore.Shared.Items[Config.scrapitem1]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem1Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem1Label..".", 3500, "error")
+                        end
                     end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem1Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem1Label..".", 3500, "error")
-                    end
-                end 
-            elseif data.rawMat == "tyre" then
-                if QBCore.Functions.HasItem(Config.scrapitem2) then
-                    rawMatType = "tyre"
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem2]["name"], image = QBCore.Shared.Items[Config.scrapitem2]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                    end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem2Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem2Label..".", 3500, "error")
+                elseif data.rawMat == "tyre" then
+                    if QBCore.Functions.HasItem(Config.scrapitem2) then
+                        rawMatType = "tyre"
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem2]["name"], image = QBCore.Shared.Items[Config.scrapitem2]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem2Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem2Label..".", 3500, "error")
+                        end  
                     end  
-                end  
-            elseif data.rawMat == "hood" then
-                if QBCore.Functions.HasItem(Config.scrapitem3) then
-                    rawMatType = "hood"
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem3]["name"], image = QBCore.Shared.Items[Config.scrapitem3]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                    end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem3Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem3Label..".", 3500, "error")
+                elseif data.rawMat == "hood" then
+                    if QBCore.Functions.HasItem(Config.scrapitem3) then
+                        rawMatType = "hood"
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem3]["name"], image = QBCore.Shared.Items[Config.scrapitem3]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem3Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem3Label..".", 3500, "error")
+                        end  
                     end  
-                end  
-            elseif data.rawMat == "filter" then
-                if QBCore.Functions.HasItem(Config.scrapitem6) then
-                    rawMatType = "filter"
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem6]["name"], image = QBCore.Shared.Items[Config.scrapitem6]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                    end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem6Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem6Label..".", 3500, "error")
+                elseif data.rawMat == "filter" then
+                    if QBCore.Functions.HasItem(Config.scrapitem6) then
+                        rawMatType = "filter"
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem6]["name"], image = QBCore.Shared.Items[Config.scrapitem6]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem6Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem6Label..".", 3500, "error")
+                        end  
                     end  
-                end  
-            elseif data.rawMat == "spark" then
-                if QBCore.Functions.HasItem(Config.scrapitem8) then
-                    rawMatType = "spark"
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem8]["name"], image = QBCore.Shared.Items[Config.scrapitem8]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                    end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem8Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem8Label..".", 3500, "error")
+                elseif data.rawMat == "spark" then
+                    if QBCore.Functions.HasItem(Config.scrapitem8) then
+                        rawMatType = "spark"
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem8]["name"], image = QBCore.Shared.Items[Config.scrapitem8]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem8Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem8Label..".", 3500, "error")
+                        end  
                     end  
-                end  
-            elseif data.rawMat == "spoiler" then
-                if QBCore.Functions.HasItem(Config.scrapitem9) then
-                    rawMatType = "spoiler"
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem9]["name"], image = QBCore.Shared.Items[Config.scrapitem9]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                    end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem9Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem9Label..".", 3500, "error")
+                elseif data.rawMat == "spoiler" then
+                    if QBCore.Functions.HasItem(Config.scrapitem9) then
+                        rawMatType = "spoiler"
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem9]["name"], image = QBCore.Shared.Items[Config.scrapitem9]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem9Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem9Label..".", 3500, "error")
+                        end  
                     end  
-                end  
-            elseif data.rawMat == "engine" then
-                if QBCore.Functions.HasItem(Config.scrapitem10) then
-                    rawMatType = "engine"
-                    TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
-                else
-                    if Config.inventoryType == "qb" then 
-                        local requiredItems = {
-                            [1] = {name = QBCore.Shared.Items[Config.scrapitem10]["name"], image = QBCore.Shared.Items[Config.scrapitem10]["image"]}, 
-                        }  
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, true)
-                        Wait(3000)
-                        TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                    end 
-                    if Config.NotifyType == 'qb' then
-                        QBCore.Functions.Notify('You need '..Config.scrapitem10Label..".", "error", 3500)
-                    elseif Config.NotifyType == "okok" then
-                        exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem10Label..".", 3500, "error")
+                elseif data.rawMat == "engine" then
+                    if QBCore.Functions.HasItem(Config.scrapitem10) then
+                        rawMatType = "engine"
+                        TriggerServerEvent("mz-scrap:server:Breakdown", RandomKey(),rawMatType)
+                    else
+                        if Config.inventoryType == "qb" then 
+                            local requiredItems = {
+                                [1] = {name = QBCore.Shared.Items[Config.scrapitem10]["name"], image = QBCore.Shared.Items[Config.scrapitem10]["image"]}, 
+                            }  
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, true)
+                            Wait(3000)
+                            TriggerEvent('inventory:client:requiredItems', requiredItems, false)
+                        end 
+                        if Config.NotifyType == 'qb' then
+                            QBCore.Functions.Notify('You need '..Config.scrapitem10Label..".", "error", 3500)
+                        elseif Config.NotifyType == "okok" then
+                            exports['okokNotify']:Alert("NEED ITEM", 'You need '..Config.scrapitem10Label..".", 3500, "error")
+                        end  
                     end  
-                end  
-            end
+                end
+            end, function() -- Cancel
+                TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+                ClearPedTasks(PlayerPedId())
+                if Config.NotifyType == 'qb' then
+                    QBCore.Functions.Notify('You cancelled crafting...', "error", 3500)
+                elseif Config.NotifyType == "okok" then
+                    exports['okokNotify']:Alert("INTERRUPTED", 'You cancelled crafting...', 3500, "error")
+                end   
+            end)
         else 
             if Config.NotifyType == 'qb' then
                 QBCore.Functions.Notify('Your hand slipped... Whoops...', "error", 3500)
