@@ -35,6 +35,7 @@ By Mr_Zain: https://dsc.gg/mzresources
 
 3A. Add the following to your ox_inventory/data/items.lua file:
 
+```lua
 -- MZ-SCRAP
     ['blowtorch'] = {
         label = 'Blow Torch',
@@ -143,6 +144,7 @@ By Mr_Zain: https://dsc.gg/mzresources
             image = "spoiler.png",
         }
     },
+```
 
 3B. If still using qb-core: Add the following to qb-core/shared/items.lua:
 
