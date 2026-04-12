@@ -1,270 +1,286 @@
 Config = Config or {}
 
+    Config.debug = false                 -- Set to false to remove debugging prints from console (server sided)
+
 ------------
 --MZ-SCRAP--
 ------------
 
 --DEFAULT CRAFT LOCATION:                   1176.08, 2635.15, 37.75
 
-Config.NotifyType = 'okok'                  -- notification type: 'qb' for qb-core standard notifications, 'okok' for okokNotify notifications
+    Config.NotifyType = 'qb'                    -- notification type: 'qb' for qb-core standard notifications, 'okok' for okokNotify notifications
 
-Config.mzskills = true                      -- change to "false" if you wish to use this resource without using mz-skills
+    Config.inventoryType = "ox"                 -- Change to "qb" to use with qb-inventory
 
-Config.ScrapXPSkill = "Scraping"            -- Take the name of your scrap skill from mz-skills (make sure they are exactly the same)
+    Config.TargetType = "ox"                    -- Switch between "qb" and "ox" depending on what target dependency your server uses.
 
-Config.debugScrapOpt = true                 -- Set to false to remove debugging prints from console (server sided)
+    Config.skillType = "bl"                     -- Change to "ps" to use with "ps-ui" or "bl" to use with "bl-ui"
 
-Config.SkillCheck = "ox"                    -- Change to "skillbar" to use skillbar, change to "ps" to use ps-ui, change to "ox" to use ox_lib
+    Config.nofindChance = 5                     -- Percentage chance that a successful search results in no output (but still gives XP).
 
-Config.TargetType = "ox"                    -- Switch between "qb" and "ox" depending on what target dependency your server uses.
+-- MZ-SKILLS SETTINGS
 
-Config.SellLocation = {
-    [1] = {
-            coords = vector3(-54.9, 6392.3, 31.62),
-            length = 1.4,
-            width = 0.5,
-            heading = 315,
-            debugPoly = false,
-            minZ = 29.02,
-            maxZ = 33.02,
-            distance = 1.0
-        },
-    }
+    Config.mzskills = true                      -- change to "false" if you wish to use this resource without using mz-skills
+    Config.ScrapXPSkill = "Scraping"            -- Take the name of your scrap skill from mz-skills (make sure they are exactly the same)
+
+    Config.scraplvl0 = 0                        -- Level 0
+    Config.scraplvl1 = 28500                    -- XP to Level 1
+    Config.scraplvl2 = 92500                    -- XP to Level 2
+    Config.scraplvl3 = 188000
+    Config.scraplvl4 = 312700
+    Config.scraplvl5 = 432600
+    Config.scraplvl6 = 606500
+    Config.scraplvl7 = 806500
+    Config.scraplvl8 = 1079800
+    Config.scraplvl9 = 1308100
+    Config.scraplvl10 = 1584350
 
 ------------------
 --HAND SCRAPPING--
 ------------------
 
-Config.handsearchlow = 3                    -- Lowest time (in seconds) to search a wreck by hand
-Config.handsearchhigh = 6                   -- Lowest time (in seconds) to search a wreck by hand
+    Config.handsearchlow = 2                    -- Lowest time (in seconds) to search a wreck by hand
+    Config.handsearchhigh = 3                   -- Lowest time (in seconds) to search a wreck by hand
 
 --if using mz-skills, the following will apply for hand scrapping:
-Config.handXPlow = 1                        -- Lowest possible amount of XP for hand scrapping.
-Config.handXPhigh = 3                       -- Highest possible amount of XP for hand scrapping.
-Config.handXPloss = 2                       -- Amount of XP lost if skill check failed
+    Config.handXPlow = 8                        -- Lowest possible amount of XP for hand scrapping.
+    Config.handXPhigh = 18                       -- Highest possible amount of XP for hand scrapping.
+    Config.handXPloss = 5                       -- Amount of XP lost if skill check failed
 -----------------------------------------------------------------------------------
-Config.Handskillcheck = true                -- change to 'false' if you do not want to skill check when searching by hand
---if the above is set to 'true' the following parameters apply:
-Config.handscrapparses = 1                  -- Number of parses to scrap a wreck by hand.
-Config.handsearchtime = 13                  -- time given to player regarding skill check
+-- SKILL CHECKS
+    Config.Handskillcheck = true                -- change to 'false' if you do not want to skill check when searching by hand
+-- if the above is set to 'true' and you are using "ps" skill-check, then the following parameters apply:
+    Config.handscrapparses = 1                  -- Number of parses to scrap a wreck by hand.
+    Config.handsearchtime = 13                  -- time given to player regarding skill check
+
+-- if the above is set to 'true' and you are using "bl" skill-check, then the following parameters apply:
+    Config.handParses = 1
+    Config.handDifficulty = 50
+    Config.handLines = 2
 -----------------------------------------------------------------------------------
 
 -------------------------
 --SCREWDRIVER SCRAPPING--
 -------------------------
 
-Config.ScrewdriverRequiredItem = "screwdriver"          -- The qb-core/items.lua name or label of the required item.
-Config.ScrewdriverRequiredItemLabel = "Screwdriver"     -- The name of the above item which will appear in notifications.
+    Config.ScrewdriverRequiredItem = "screwdriver"          -- The qb-core/items.lua name or label of the required item.
+    Config.ScrewdriverRequiredItemLabel = "Screwdriver"     -- The name of the above item which will appear in notifications.
 
 --if using mz-skills, the following will apply for screwdriver scrapping:
-Config.screwdriverXP = 400                  -- Minimum amount of "Scraping" XP to access screwdriver salvaging
-Config.screwdriverXPlow = 1                 -- Lowest possible amount of XP for screwdriver scrapping.
-Config.screwdriverXPmid = 2                 -- Mid possible amount of XP for screwdriver scrapping.
-Config.screwdriverXPhigh = 4                -- Highest possible amount of XP for screwdriver scrapping.
-Config.screwdriverXPloss = 3                -- Amount of XP lost for failing skillcheck
+    Config.screwdriverXP = 28500                -- Minimum amount of "Scraping" XP to access screwdriver salvaging
+    Config.screwdriverXPlow = 12                -- Lowest possible amount of XP for screwdriver scrapping.
+    Config.screwdriverXPmid = 20                -- Mid possible amount of XP for screwdriver scrapping.
+    Config.screwdriverXPhigh = 25               -- Highest possible amount of XP for screwdriver scrapping.
+    Config.screwdriverXPloss = 8                -- Amount of XP lost for failing skillcheck
+
 -----------------------------------------------------------------------------------
-Config.screwdriversuccess = 2               -- Chance (in %) for the screwdriver to break from wear and tear (Set to 0 if you want to disable).
-Config.screwsearchlow = 3                   -- Lowest time (in seconds) to search a wreck with a screwdriver.
-Config.screwsearchhigh = 5                  -- Lowest time (in seconds) to search a wreck with a screwdriver.
-Config.Screwdriverskillcheck = true         -- change to 'false' if you do not want to skill check when searching by screwdriver.
---if the above is set to 'true' the following parameters apply:
-Config.screwscrapparses = 2                 -- Number of parses to scrap a wreck with a screwdriver.
-Config.screwsearchtime = 12                 -- time given to player regarding skill check
-Config.screwdriverfail = 10                 -- Chance (in %) for the screwdriver to break if skillcheck fails (Set to 0 if you want to disable).
+    Config.screwdriversuccess = 2               -- Chance (in %) for the screwdriver to break from wear and tear (Set to 0 if you want to disable).
+
+    Config.screwsearchlow = 1                   -- Lowest time (in seconds) to search a wreck with a screwdriver.
+    Config.screwsearchhigh = 3                  -- Lowest time (in seconds) to search a wreck with a screwdriver.
+-----------------------------------------------------------------------------------
+-- SKILLCHECK 
+
+    Config.Screwdriverskillcheck = true         -- change to 'false' if you do not want to skill check when searching by screwdriver.
+-- if the above is set to 'true' and you are using "ps" skill-check, then the following parameters apply:
+    Config.screwscrapparses = 2                 -- Number of parses to scrap a wreck with a screwdriver.
+    Config.screwsearchtime = 12                 -- time given to player regarding skill check
+    Config.screwdriverfail = 10                 -- Chance (in %) for the screwdriver to break if skillcheck fails (Set to 0 if you want to disable).
+-- if the above is set to 'true' and you are using "bl" skill-check, then the following parameters apply:
+    Config.screwParses = 1
+    Config.screwDifficulty = 60
+    Config.screwLines = 3
 -----------------------------------------------------------------------------------
 
 -----------------------
 --BLOWTORCH SCRAPPING--
 -----------------------
 
-Config.BlowtorchRequiredItem = "blowtorch"          -- The qb-core/items.lua name or label of the required item.
-Config.BlowtorchRequiredItemLabel = "Blowtorch"     -- The name of the above item which will appear in notifications.
+    Config.BlowtorchRequiredItem = "blowtorch"          -- The qb-core/items.lua name or label of the required item.
+    Config.BlowtorchRequiredItemLabel = "Blowtorch"     -- The name of the above item which will appear in notifications.
 
 --if using mz-skills, the following will apply for blowtorch scrapping:
-Config.blowtorchXP = 1600                   -- Minimum amount of "Scraping" XP to access blowtorch salvaging.
-Config.blowtorchXPlow = 2                   -- Lowest possible amount of XP for blowtorch scrapping.
-Config.blowtorchXPmid = 3                   -- Mid possible amount of XP for blowtorch scrapping.
-Config.blowtorchXPhigh = 5                  -- Highest possible amount of XP for blowtorch scrapping.
-Config.blowtorchXPloss = 4                  -- Amount of XP lost for failing skill check with blowtorch.
+    Config.blowtorchXP = 92500                   -- Minimum amount of "Scraping" XP to access blowtorch salvaging.
+    Config.blowtorchXPlow = 17                   -- Lowest possible amount of XP for blowtorch scrapping.
+    Config.blowtorchXPmid =  23                  -- Mid possible amount of XP for blowtorch scrapping.
+    Config.blowtorchXPhigh = 30                  -- Highest possible amount of XP for blowtorch scrapping.
+    Config.blowtorchXPloss = 10                  -- Amount of XP lost for failing skill check with blowtorch.
 -----------------------------------------------------------------------------------
-Config.blowtorchsuccess = 2                 -- Chance (in %) for the blowtorch to burn out from wear and tear (Set to 0 if you want to disable).
-Config.blowsearchlow = 3                    -- Lowest time (in seconds) to search a wreck with a blowtorch.
-Config.blowsearchhigh = 8                   -- Lowest time (in seconds) to search a wreck with a blowtorch.
-Config.Blowtorchskillcheck = true           -- change to 'false' if you do not want to skill check when searching by blowtorch.
---if the above is set to 'true' the following parameters apply:
-Config.blowscrapparses = 3                  -- Number of parses to scrap a wreck with a blowtorch.
-Config.blowsearchtime = 10                  -- time given to player regarding skill check.
-Config.blowtorchfail = 15                   -- Chance (in %) for the blowtorch to break if skillcheck fails (Set to 0 if you want to disable).
+    Config.blowtorchsuccess = 2                 -- Chance (in %) for the blowtorch to burn out from wear and tear (Set to 0 if you want to disable).
+
+    Config.blowsearchlow = 3                    -- Lowest time (in seconds) to search a wreck with a blowtorch.
+    Config.blowsearchhigh = 8                   -- Lowest time (in seconds) to search a wreck with a blowtorch.
+
 -----------------------------------------------------------------------------------
+-- SKILLCHECK 
+    Config.Blowtorchskillcheck = true           -- change to 'false' if you do not want to skill check when searching by blowtorch.
+-- if the above is set to 'true' and the skillcheck is set to "ps", then the following parameters apply:
+    Config.blowscrapparses = 3                  -- Number of parses to scrap a wreck with a blowtorch.
+    Config.blowsearchtime = 10                  -- time given to player regarding skill check.
+    Config.blowtorchfail = 15                   -- Chance (in %) for the blowtorch to break if skillcheck fails (Set to 0 if you want to disable).
+-- if the above is set to 'true' and the skillcheck is set to "bl", then the following parameters apply:
+    Config.blowParses = 1
+    Config.blowDifficulty = 70
+    Config.blowLines = 4 
+-----------------------------------------------------------------------------------
+
+--------------------
+--SCRAPING OUTPUTS--
+--------------------
+
+-- HANDS Outputs 
+-- NOTE: All outputs should add to 100 in order for all items to be obtainable. Lower probabilities should appear at the bottom for less valuable drops.
+    Config.hands1prob = 20              -- = 20/100 = 20% chance to pull Config.scrapitem1
+    Config.hands2prob = 22
+    Config.hands3prob = 15
+    Config.hands4prob = 12
+    Config.hands5prob = 9
+    Config.hands6prob = 7 
+    Config.hands7prob = 4
+    Config.hands8prob = 3
+    Config.hands9prob = 2
+    Config.hands10prob = 1
+
+-- SCREWDRIVER Outputs
+    Config.screw1prob = 10              -- = 10/100 = 10% chance to pull Config.scrapitem1
+    Config.screw2prob = 15
+    Config.screw3prob = 20
+    Config.screw4prob = 15
+    Config.screw5prob = 15
+    Config.screw6prob = 9 
+    Config.screw7prob = 7
+    Config.screw8prob = 4
+    Config.screw9prob = 3
+    Config.screw10prob = 2
+
+-- BLOWTORCH Outputs
+    Config.torch1prob = 5              -- = 20/100 = 20% chance to pull item1.
+    Config.torch2prob = 10
+    Config.torch3prob = 18
+    Config.torch4prob = 17
+    Config.torch5prob = 17
+    Config.torch6prob = 11
+    Config.torch7prob = 9
+    Config.torch8prob = 6
+    Config.torch9prob = 4
+    Config.torch10prob = 3
+
+-- ITEMS
+    Config.scrapitem1 = "cardoor"
+    Config.scrapitem1Label = "Car Door"
+    Config.scrapitem2 = "oldtyre"
+    Config.scrapitem2Label = "Old Tyre"
+    Config.scrapitem3 = "carhood"
+    Config.scrapitem3Label = "Car Hood"
+    Config.scrapitem4 = "carbattery"
+    Config.scrapitem4Label = "Car Battery"
+    Config.scrapitem5 = "gearshift"
+    Config.scrapitem5Label = "Gear Shift"
+    Config.scrapitem6 = "airfilter"
+    Config.scrapitem6Label = "Air Filter"
+    Config.scrapitem7 = "carradio"
+    Config.scrapitem7Label = "Car Radio"
+    Config.scrapitem8 = "sparkplugs"
+    Config.scrapitem8Label = "Spark Plugs"
+    Config.scrapitem9 = "spoiler"
+    Config.scrapitem9Label = "Car Spoiler"
+    Config.scrapitem10 = "carengine"
+    Config.scrapitem10Label = "Car Engine"
 
 ------------
 --CRAFTING--
 ------------
 
------------------------
---BREAKING DOWN TIRES--
------------------------
--- ps-ui:circle parameters
-Config.tireparselow = 4
-Config.tireparsehigh = 6
-Config.tiretimepslow = 9
-Config.tiretimepshigh = 12
--- Skillbar:
-Config.tirelow = 4                          -- Lowest number of skillcheck parses to break down tires
-Config.tirehigh = 6                         -- Highest number of skillcheck parses to break down tires
-Config.tiretimelow = 10                     -- Lowest time (in seconds) to strip down tires.
-Config.tiretimehigh = 15                    -- Highest time (in seconds) to strip down tires.
-Config.tiresneeded = 5                      -- Number of tires needed to perform breakdown
-Config.Rubberoutputlow = 15                 -- Lowest amount of rubber from tire breakdown
-Config.Rubberoutputhigh = 20                -- Highest amount of rubber from tire breakdown
---If you are using mz-skills, the following parameters apply:
-Config.tireXPlow = 2                        -- Lowest amount of "Scraping" XP obtained for breaking down tires.
-Config.tireXPhigh = 4                       -- Highest amount of "Scraping" XP obtained for breaking down tires.
-Config.tireXPloss = 2                       -- Amount of "Scraping" XP lost for failing crafting skillcheck.
------------------------------------------------------------------------------------
+    Config.craftingLocation = vector3(1176.08, 2635.15, 37.75)
 
-------------------
---CLEANING NAILS--
-------------------
--- ps-ui:circle parameters
-Config.nailparselow = 4
-Config.nailparsehigh = 6
-Config.nailtimepslow = 9
-Config.nailtimepshigh = 12
--- skillbar parameters:
-Config.naillow = 4                          -- Lowest number of skillcheck parses to clean nails.
-Config.nailhigh = 6                         -- Highest number of skillcheck parses to clean nails.
-Config.nailtimelow = 10                     -- Lowest time (in seconds) to clean nails.
-Config.nailtimehigh = 15                    -- Highest time (in seconds) to clean nails.
-Config.nailsneeded = 5                      -- Number of nails needed to perform clean
-Config.metaloutputlow = 15                  -- Lowest amount of metalscrap from nails.
-Config.metaloutputhigh = 20                 -- Highest amount of metalscrap from nails.
---If you are using mz-skills, the following parameters apply:
-Config.nailXPlow = 2                        -- Lowest amount of "Scraping" XP obtained for cleaning nails.
-Config.nailXPhigh = 4                       -- Highest amount of "Scraping" XP obtained for cleaning nails.
-Config.nailXPloss = 2                       -- Amount of "Scraping" XP lost for failing crafting skillcheck.
------------------------------------------------------------------------------------
+-- CRAFTING USES BL-UI SKILLCHECKS/HACKS WITH THE FOLLOWING PARAMETERS
+    Config.craftskillType = "pathfind"
 
----------------------
---BREAK APART RADIO--
----------------------
--- ps-ui:circle parameters
-Config.radioparselow = 4
-Config.radioparsehigh = 6
-Config.radiotimepslow = 9
-Config.radiotimepshigh = 12
--- skillbar parameters:
-Config.radiolow = 7                         -- Lowest number of skillcheck parses to break apart radio.
-Config.radiohigh = 9                        -- Highest number of skillcheck parses to break apart radio.
-Config.radiotimelow = 10                    -- Lowest time (in seconds) to break apart radio.
-Config.radiotimehigh = 15                   -- Highest time (in seconds) to break apart radio.
-Config.radiosneeded = 3                     -- Number of radio needed to strip components.
-Config.elecoutputlow = 7                    -- Lowest amount of electric scrap from radio components. 
-Config.elecoutputhigh = 11                  -- Highest amount of electric scrap from radio components. 
---If you are using mz-skills, the following parameters apply:
-Config.radioXPlow = 2                       -- Lowest amount of "Scraping" XP obtained to break apart radio.
-Config.radioXPhigh = 4                      -- Highest amount of "Scraping" XP obtained to break apart radio.
-Config.radioXPloss = 2                      -- Amount of "Scraping" XP lost for failing crafting skillcheck.
------------------------------------------------------------------------------------
+-- If "Config.craftskillType = "pathfind" or "untangle" then: 
+    Config.craftingParses = 1
+    Config.craftingNodes = 7
+    Config.craftingDuration = 15000
+-- ELSE If "Config.craftskillType = "numslide" then: 
+    -- Config.craftingParses - EDIT "Config.craftingParses = 1" above (Recommended to keep at 1)
+    Config.craftingDifficulty = 50
+    Config.craftingKeys = 7
 
--------------
---CAR JACKS--
--------------
--- ps-ui:circle parameters
-Config.jackparselow = 4
-Config.jackparsehigh = 6
-Config.jacktimepslow = 9
-Config.jacktimepshigh = 12
--- skillbar parameters:
-Config.jackslow = 7                         -- Lowest number of skillcheck parses to break apart jacks.
-Config.jackshigh = 9                        -- Highest number of skillcheck parses to break apart jacks.
-Config.jackstimelow = 10                    -- Lowest time (in seconds) to break apart jacks.
-Config.jackstimehigh = 15                   -- Highest time (in seconds) to break apart jacks.
-Config.jacksneeded = 3                      -- Number of jacks needed to break apart.
-Config.jacksmetaloutputlow = 6              -- Lowest amount of metal scrap from broken up jacks. 
-Config.jacksmetaloutputhigh = 9             -- Highest amount of metal scrap from broken up jacks. 
-Config.jackssteeloutputlow = 3              -- Lowest amount of steel from broken up jacks. 
-Config.jackssteeloutputlow = 6              -- Highest amount of steel from broken up jacks. 
---If you are using mz-skills, the following parameters apply:
-Config.jacksXPlow = 2                       -- Lowest amount of "Scraping" XP obtained to break apart jacks.
-Config.jacksXPhigh = 4                      -- Highest amount of "Scraping" XP obtained to break apart jacks.
-Config.jacksXPloss = 2                      -- Amount of "Scraping" XP lost for failing crafting skillcheck.
------------------------------------------------------------------------------------
+-- CAR DOORS
+-- Item Required = "Config.scrapitem1"
+    Config.scrapitem1req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem1"
+    Config.ScrapCraft1Item = "metalscrap"   -- Return item
+    Config.ScrapCraft1Low = 25              -- Lowest Amount
+    Config.ScrapCraft1High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft1LossLow = 1           -- Lowest amount of "Config.scrapitem1" lost for a failed skill check
+    Config.ScrapCraft1LossHigh = 5          -- Highest amount of "Config.scrapitem1" lost for a failed skill check
 
--------------
---CAR DOORS--
--------------
--- ps-ui:circle parameters
-Config.doorparselow = 4
-Config.doorparsehigh = 6
-Config.doortimepslow = 9
-Config.doortimepshigh = 12
--- skillbar parameters:
-Config.doorslow = 6                         -- Lowest number of skillcheck parses to break apart car doors.
-Config.doorshigh = 8                        -- Highest number of skillcheck parses to break apart car doors.
-Config.doorstimelow = 10                    -- Lowest time (in seconds) to break apart car doors.
-Config.doorstimehigh = 15                   -- Highest time (in seconds) to break apart car doors.
-Config.doorsneeded = 3                      -- Number of doors needed to break apart.
-Config.doorglasslow = 5                     -- Lowest amount of glass from broken up doors.
-Config.doorglasshigh = 15                   -- Highest amount of glass from broken up doors.
-Config.doorironlow = 3                      -- Lowest amount of iron from broken up doors.
-Config.doorironhigh = 6                     -- Highest amount of iron from broken up doors.
---If you are using mz-skills, the following parameters apply:
-Config.doorsXPlow = 2                       -- Lowest amount of "Scraping" XP obtained to break apart car doors.
-Config.doorsXPhigh = 4                      -- Highest amount of "Scraping" XP obtained to break apart car doors.
-Config.doorsXPloss = 2                      -- Amount of "Scraping" XP lost for failing crafting skillcheck.
------------------------------------------------------------------------------------
+-- CAR TYRES    
+-- Item Required = "Config.scrapitem2"
+    Config.scrapitem2req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem2"
+    Config.ScrapCraft2Item = "rubber"       -- Return item
+    Config.ScrapCraft2Low = 25              -- Lowest Amount
+    Config.ScrapCraft2High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft2LossLow = 1           -- Lowest amount of "Config.scrapitem2" lost for a failed skill check
+    Config.ScrapCraft2LossHigh = 5          -- Highest amount of "Config.scrapitem2" lost for a failed skill check
 
--------------
---CAR HOODS--
--------------
--- ps-ui:circle parameters
-Config.hoodparselow = 4
-Config.hoodparsehigh = 6
-Config.hoodtimepslow = 9
-Config.hoodtimepshigh = 12
--- skillbar parameters:
-Config.hoodslow = 6                         -- Lowest number of skillcheck parses to break apart car hood.
-Config.hoodshigh = 8                        -- Highest number of skillcheck parses to break apart car hood.
-Config.hoodstimelow = 10                    -- Lowest time (in seconds) to break apart car hood.
-Config.hoodstimehigh = 15                   -- Highest time (in seconds) to break apart car hood.
-Config.hoodneeded = 3                       -- Number of hoods needed to break apart.
-Config.hoodscraplow = 5                     -- Lowest amount of metal scrap from broken up hood.
-Config.hoodscraphigh = 15                   -- Highest amount of metal scrap from broken up hood.
-Config.hoodcopperlow = 3                    -- Lowest amount of copper from broken up hood.
-Config.hoodcopperhigh = 6                   -- Highest amount of copper from broken up hood.
---If you are using mz-skills, the following parameters apply:
-Config.hoodsXPlow = 2                       -- Lowest amount of "Scraping" XP obtained to break apart car hood.
-Config.hoodsXPhigh = 4                      -- Highest amount of "Scraping" XP obtained to break apart car hood.
-Config.hoodsXPloss = 2                      -- Amount of "Scraping" XP lost for failing crafting skillcheck.
------------------------------------------------------------------------------------
+-- CAR HOOD    
+-- Item Required = "Config.scrapitem3"
+    Config.scrapitem3req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem3"
+    Config.ScrapCraft3Item = "iron"         -- Return item
+    Config.ScrapCraft3Low = 25              -- Lowest Amount
+    Config.ScrapCraft3High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft3LossLow = 1           -- Lowest amount of "Config.scrapitem3" lost for a failed skill check
+    Config.ScrapCraft3LossHigh = 5          -- Highest amount of "Config.scrapitem3" lost for a failed skill check
 
---------------
---CAR ENGINE--
---------------
--- ps-ui:circle parameters
-Config.engineparselow = 4
-Config.engineparsehigh = 6
-Config.enginetimepslow = 9
-Config.enginetimepshigh = 12
--- skillbar parameters:
-Config.enginelow = 10                       -- Lowest number of skillcheck parses to break apart car engine.
-Config.enginehigh = 13                      -- Highest number of skillcheck parses to break apart car engine.
-Config.enginetimelow = 20                   -- Lowest time (in seconds) to break apart car engine.
-Config.enginetimehigh = 30                  -- Highest time (in seconds) to break apart car engine.
-Config.engineneeded = 1                     -- Number of engines needed to break apart.
-Config.enginescraplow = 7                   -- Lowest amount of metal scrap from a broken up engine.
-Config.enginescraphigh = 12                 -- Highest amount of metal scrap from a broken up engine.
-Config.enginecopperlow = 4                  -- Lowest amount of copper from a broken up engine.
-Config.enginecopperhigh = 8                 -- Highest amount of copper from a broken up engine.
-Config.engineironlow = 3                    -- Lowest amount of iron from a broken up engine.
-Config.engineironhigh = 6                   -- Highest amount of iron from a broken up engine.
-Config.enginesteellow = 5                   -- Lowest amount of steel from a broken up engine.
-Config.enginesteelhigh = 10                 -- Highest amount of steel from a broken up engine.
---If you are using mz-skills, the following parameters apply:
-Config.engineXPlow = 5                      -- Lowest amount of "Scraping" XP obtained to break apart car engine.
-Config.engineXPhigh = 8                     -- Highest amount of "Scraping" XP obtained to break apart car engine.
-Config.engineXPloss = 5                     -- Amount of "Scraping" XP lost for failing crafting skillcheck.
+-- AIR FILTER   
+-- Item Required = "Config.scrapitem6"
+    Config.scrapitem6req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem6"
+    Config.ScrapCraft6Item = "glass"         -- Return item
+    Config.ScrapCraft6Low = 25              -- Lowest Amount
+    Config.ScrapCraft6High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft6LossLow = 1           -- Lowest amount of "Config.scrapitem6" lost for a failed skill check
+    Config.ScrapCraft6LossHigh = 5          -- Highest amount of "Config.scrapitem6" lost for a failed skill check
+
+-- SPARK PLUGS   
+-- Item Required = "Config.scrapitem8"
+    Config.scrapitem8req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem8"
+    Config.ScrapCraft8Item = "gunpowder"         -- Return item
+    Config.ScrapCraft8Low = 25              -- Lowest Amount
+    Config.ScrapCraft8High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft8LossLow = 1           -- Lowest amount of "Config.scrapitem8" lost for a failed skill check
+    Config.ScrapCraft8LossHigh = 5          -- Highest amount of "Config.scrapitem8" lost for a failed skill check
+
+-- SPOILER   
+-- Item Required = "Config.scrapitem9"
+    Config.scrapitem9req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem9"
+    Config.ScrapCraft9Item = "plastic"      -- Return item
+    Config.ScrapCraft9Low = 25              -- Lowest Amount
+    Config.ScrapCraft9High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft9LossLow = 1           -- Lowest amount of "Config.scrapitem9" lost for a failed skill check
+    Config.ScrapCraft9LossHigh = 5          -- Highest amount of "Config.scrapitem9" lost for a failed skill check
+
+-- ENGINE
+-- Item Required = "Config.scrapitem10"
+    Config.scrapitem10req = 5                -- Amount Required to breakdown
+-- Rewards for breaking down "Config.scrapitem10"
+    Config.ScrapCraft10Item = "steel"        -- Return item
+    Config.ScrapCraft10Low = 25              -- Lowest Amount
+    Config.ScrapCraft10High = 35             -- Highest Amount
+-- Loss if skillcheck failed
+    Config.ScrapCraft10LossLow = 1           -- Lowest amount of "Config.scrapitem10" lost for a failed skill check
+    Config.ScrapCraft10LossHigh = 5          -- Highest amount of "Config.scrapitem10" lost for a failed skill check
 
 Config.Objects = {
     -- Scrap objects player can interact with
@@ -285,51 +301,4 @@ Config.Objects = {
     "prop_rub_carwreck_14",
     "prop_rub_carwreck_15",
     "prop_rub_carwreck_16",
-}
-
-Config.CarItems = {
-    [1] = {
-        item = "tissuebox",
-        price = math.random(20, 40)
-    },
-    [2] = {
-        item = "chewinggum",
-        price = math.random(25, 50)
-    },
-    [3] = {
-        item = "carwipers",
-        price = math.random(40, 60)
-    },
-    [4] = {
-        item = "fuelcap",
-        price = math.random(60, 80)
-    },
-    [5] = {
-        item = "carbattery",
-        price = math.random(100, 130)
-    },
-    [6] = {
-        item = "gearshift",
-        price = math.random(130, 175)
-    },
-    [7] = {
-        item = "airfilter",
-        price = math.random(160, 190)
-    },
-    [8] = {
-        item = "spoiler",
-        price = math.random(220, 260)
-    },
-    [9] = {
-        item = "carrim",
-        price = math.random(260, 300)
-    },
-    [10] = {
-        item = "cargrill",
-        price = math.random(300, 325)
-    },
-    [11] = {
-        item = "sparkplugs",
-        price = math.random(270, 310)
-    }
 }

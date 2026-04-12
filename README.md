@@ -1,31 +1,150 @@
-### MZ-SCRAP - a skill based scrapping function for QB-CORE based FiveM servers
+### MZ-SCRAP - a skill-based, scraping job for qbox and qb-core FiveM servers
 
-### Introduction 
-- A scrap job designed to allow players to interact with scrap found in the base GTA V models, particularly the scrap yard south of the main city, the car and plane scrap yard found South of the main part of Sandy Shores and (to a lesser extent) the scrap yard found in the heart of Paleto.
-- Scrapping commences with the player using their hands. Each successful scrap yields low-tier items + low-tier experience
-- Mid-tier scrapping involves the use of a screwdriver. If using a skill check, the skill check is slightly harder, takes slightly longer and produces mid-tier items and mid-tier XP.
-- High-tier scrapping involves the use of a blowtorch. scrapping function is, again, slightly harder, takes slightly longer and produces top-tier items.
-- Certain items obtained from scrapping can be broken down into materials used for crafting in other scripts.
-- Thanks to adamdtt (Arctic Gaming) for ox-target code functionality.
+By Mr_Zain: https://dsc.gg/mzresources
 
-### Dependencies
-- mz-skills (a modified version of qb-skillz (now B1-skillz) made and distributed by Kings#4220 of Burn One Studios - accessible at: https://github.com/Burn-One-Studios/B1-skillz)
-- progressbar
-- qb-target
-- qb-skillbar
-- OPTIONAL: (Configured to work with okokNotify as well as base qb-core notifications and ps-ui).
+## Introduction 
+- Updated for qbox - configured with ox_target and ox_inventory;
+- Advanced debug functionality via config to quickly track down errors even if the code is modified; 
+- Updated reward outputs to avoid exploitation even with open-source code (for both scraping and crafting functionality);
+- Self-explanatory and broad config file to help easily set up a custom experience without having to have extensive coding experience; 
+- Optimised code to remove depricated functions and old loops; 
+
+## Description
+- A scrap job designed to allow players to interact with scrap found in the base GTA V models, particularly the scrap yard south of the main city, the car and plane scrap yard found South of the main part of Sandy Shores and (to a lesser extent) the scrap yard found in the heart of Paleto; 
+- Scraping commences with the player using their hands, then using a screwdriver, then using a blowtorch. Using better equipment improves the prospects of obtaining better scrap car parts;
+- The higher the level of the player, the better the chance of getting more scrap items when scraping;
+- Each successful scrap yields low-tier items + low-tier experience (customisable via config);
+- Mid-tier scrapping involves the use of a screwdriver. If using a skill check, the skill check is slightly harder, takes slightly longer and produces mid-tier items and mid-tier XP;
+- High-tier scrapping involves the use of a blowtorch. scrapping function is, again, slightly harder, takes slightly longer and produces top-tier items;
+- Certain items obtained from scrapping can be broken down into materials used for crafting. 
+
+## Dependencies
+- mz-skills: https://github.com/MrZainRP/mz-skills
+- ps-ui: https://github.com/Project-Sloth/ps-ui
+- bl-ui: https://github.com/Byte-Labs-Studio/bl_ui
 
 ### Installation Instruction
 
-### A. MZ-SKILLS
+## A. MZ-SKILLS
 
 1. Ensure that mz-skills forms part of your running scripts if using this script with mz-skills. 
 
 2. Run the "skills.sql" sql file and open the database. (This will add a data table to the existing "players" database which will hold the skill value for "scrapping" as well as other jobs)
 
-### B. QB-CORE/SHARED/ITEMS.LUA
+## B. SETTING UP INVENTORY ITEMS
 
-3. Add the following items to qb-core/shared/items.lua:
+3A. Add the following to your ox_inventory/data/items.lua file:
+
+-- MZ-SCRAP
+    ['blowtorch'] = {
+        label = 'Blow Torch',
+        description = 'Ooo hot...',
+        weight = 125,
+        client = {
+            image = "blowtorch.png",
+        }
+    },
+    ['screwdriver'] = {
+        label = 'Screwdriverset',
+        description = 'A Screw driver',
+        weight = 125,
+        stack = false,
+        client = {
+            image = "screwdriver.png",
+        }
+    },
+    ['airfilter'] = {
+        label = 'Air Filter',
+        weight = 100,
+        stack = true,
+        description = "A car air filter.",
+        client = {
+            image = "airfilter.png",
+        }
+    },
+    ['carbattery'] = {
+        label = 'Car Battery',
+        weight = 100,
+        stack = true,
+        description = "A car battery.",
+        client = {
+            image = "carbattery.png",
+        }
+    },
+    ['cardoor'] = {
+        label = 'Car Door',
+        weight = 100,
+        stack = true,
+        description = "A car door.",
+        client = {
+            image = "cardoor.png",
+        }
+    },
+    ['carengine'] = {
+        label = 'Car Engine',
+        weight = 100,
+        stack = true,
+        description = "A car engine.",
+        client = {
+            image = "carengine.png",
+        }
+    },
+    ['carhood'] = {
+        label = 'Car Hood',
+        weight = 100,
+        stack = true,
+        description = "A car bonnet.",
+        client = {
+            image = "carhood.png",
+        }
+    },
+    ['carradio'] = {
+        label = 'Car Radio',
+        weight = 100,
+        stack = true,
+        description = "A car radio.",
+        client = {
+            image = "carradio.png",
+        }
+    },
+    ['gearshift'] = {
+        label = 'Gear Shift',
+        weight = 100,
+        stack = true,
+        description = "A car gear shift.",
+        client = {
+            image = "gearshift.png",
+        }
+    },
+    ['oldtyre'] = {
+        label = 'Old Tyre',
+        weight = 100,
+        stack = true,
+        description = "An old Tyre, looks like it has a bit of wear on it...",
+        client = {
+            image = "oldtyre.png",
+        }
+    },
+    ['sparkplugs'] = {
+        label = 'Spark Plugs',
+        weight = 100,
+        stack = true,
+        description = "Car spark plugs.",
+        client = {
+            image = "sparkplugs.png",
+        }
+    },
+    ['spoiler'] = {
+        label = 'Spoiler',
+        weight = 100,
+        stack = true,
+        description = "An old school car spoiler.",
+        client = {
+            image = "spoiler.png",
+        }
+    },
+
+3B. If still using qb-core: Add the following to qb-core/shared/items.lua:
 
 ```lua
 	['screwdriver'] 				 = {['name'] = 'screwdriver', 			  		['label'] = 'Screwdriver', 				['weight'] = 100, 		['type'] = 'item', 		['image'] = 'screwdriver.png', 			['unique'] = false, 	['useable'] = true, 	['shouldClose'] = false,   ['combinable'] = nil,   ['description'] = 'A flathead screwdriver. I mean sure the handle is a bit worn but this thing probably works.'},
@@ -58,44 +177,13 @@
 	["carhood"]         	 	 = {["name"] = "carhood",         			["label"] = "Car Hood",    				["weight"] = 1450,      ["type"] = "item",      ["image"] = "carhood.png",     			["unique"] = false,     ["useable"] = true,     ["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = "The hood component of a motor vehicle."},
 ```
 
-4. Add the images which appear in the "images" folder to your inventory images folder. If using lj-inventory, add the images to: lj-inventory/html/images/
-
-5. Depending on how you want to incorporate the screwdriver, blowtorch and wd40 - you can make these items craftable or rare drops from other activities or you can simply add them to the hardware section of qb-shops. If you wish to simply make them purchaseable, navigate to line 257 of qb-shops/config.lua and add the following after line 257:
-
-```lua
-        [16] = {
-            name = "screwdriver",
-            price = 250,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 16,
-        },
-        [17] = {
-            name = "wd40",
-            price = 40,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 17,
-        },
-        [18] = {
-            name = "blowtorch",
-            price = 1000,
-            amount = 50,
-            info = {},
-            type = "item",
-            slot = 18,
-        },		
-```
-
-6. If you attend to all of the above steps you will need to restart the server in order for the new added items to be recognised by qb-core. Starting the mz-scrap resource without doing this will cause errors. Please restart your server ensuring that mz-scrap is ensured/starts after qb-core starts (ideally it should just form part of your [qb] folder). Happy scrapping!
-
-P.S. Loot tables appear in the server.lua file. They are raesonably self-explanatory. Pistol1, 2, 3 and 4 are items that I have previously used to combine into a low tier hand gun. If you are not interested in that, remove that items from the loot table (they are each no more than 1% drop at each tier). 
+4. Add the images in the "images" folder to your inventory images source (for ox_inventory - web/images folder).
 
 ## C. SUPPORT
 
-7. When seeking support, please address the following questions and ensure you are seeking support in the correct sub-forum if possible. This will allow myself and others to address your concerns quicker than would otherwise be the case.
+5. Extended support for mz-resources has ended. Limited support is available via Discord: https://dsc.gg/mzresources 
+
+6. When seeking support, please address the following questions and ensure you are seeking support in the correct sub-forum if possible. This will allow myself and others to address your concerns quicker than would otherwise be the case.
 
 - A. What is the issue? What were you doing to cause the issue? 
 
@@ -107,6 +195,4 @@ P.S. Loot tables appear in the server.lua file. They are raesonably self-explana
 
 - E. Do you have any evidence to show what the issue is? (Screengrabs or short clips are very useful in working out how the error is caused in the first place - which makes finding a fix a lot easier).
 
------------------------
-
-Please note, failure to provide the detail set out above will simply mean that time needs to be spent working out what the issue is in the first place rather than responding to it.
+Failure to provide the detail set out above will simply mean that time needs to be spent working out what the issue is in the first place rather than responding to it.

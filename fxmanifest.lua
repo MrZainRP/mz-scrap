@@ -6,14 +6,12 @@ lua54 'yes'
 
 author 'Mr_Zain - https://dsc.gg/mzresources'
 
-description 'mz-scrap - a progression based scrapping resource for qb-core (with or without mz-skill XP integration)'
+description 'mz-scrap - a progression based, scraping job for qbox and qb-core (with or without mz-skill XP integration)'
 
-version '1.5.2'
+version '1.6.0'
 
 shared_scripts {
-	'@qb-core/shared/locale.lua',
 	'config.lua',
-	'locales/en.lua',
     '@ox_lib/init.lua',
 }
 
